@@ -198,7 +198,9 @@
 
     /* ABAS */
     .tab-nav {
-      display: inline-flex;
+      display: flex;
+      width: fit-content;
+      flex-wrap: wrap;
       gap: 8px;
       padding: 6px;
       margin-bottom: 20px;
@@ -342,7 +344,8 @@
     }
 
     /* BUTTON */
-    #predict-btn {
+    #predict-btn,
+    #train-btn {
       width: 100%;
       margin-top: 24px;
       padding: 14px 18px;
@@ -357,9 +360,12 @@
       box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
     }
 
-    #predict-btn:hover  { background: var(--brand-strong); }
-    #predict-btn:active { transform: scale(0.98); }
-    #predict-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #predict-btn:hover,
+    #train-btn:hover  { background: var(--brand-strong); }
+    #predict-btn:active,
+    #train-btn:active { transform: scale(0.98); }
+    #predict-btn:disabled,
+    #train-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* RESULT PANEL */
     .result-panel {
@@ -508,6 +514,54 @@
       gap: 20px;
     }
 
+    /* UPLOAD */
+    .upload-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.65fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .upload-help {
+      color: var(--muted-strong);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .upload-status {
+      border-radius: var(--radius-md);
+      display: none;
+      font-size: 0.9rem;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-top: 16px;
+      padding: 14px 16px;
+    }
+
+    .upload-status.success {
+      background: var(--low-soft);
+      color: var(--low);
+      display: block;
+    }
+
+    .upload-status.error {
+      background: var(--high-soft);
+      color: var(--high);
+      display: block;
+    }
+
+    .training-metrics {
+      display: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .training-metrics.active {
+      display: grid;
+    }
+
     /* DOCUMENTAÇÃO */
     .doc-layout {
       display: grid;
@@ -644,6 +698,7 @@
       body { padding: 16px; }
       .hero,
       .layout,
+      .upload-layout,
       .doc-grid,
       .flow-steps {
         grid-template-columns: 1fr;
@@ -719,6 +774,7 @@
 
   <nav class="tab-nav" aria-label="Navegação da entrega">
     <button class="tab-btn active" type="button" data-tab-target="inference" onclick="switchTab('inference')">Inferência</button>
+    <button class="tab-btn" type="button" data-tab-target="upload" onclick="switchTab('upload')">Upload CSV</button>
     <button class="tab-btn" type="button" data-tab-target="documentation" onclick="switchTab('documentation')">Documentação</button>
   </nav>
 
@@ -847,6 +903,34 @@
   </div>
   </section>
 
+  <section class="tab-panel" id="tab-upload" aria-label="Upload de CSV para treino do modelo">
+    <div class="upload-layout">
+      <section class="card" aria-labelledby="upload-title">
+        <div class="section-label" id="upload-title">Upload CSV</div>
+        <p class="upload-help">
+          Envie a base <strong>gym_churn_us.csv</strong> para treinar o modelo no backend. Depois do treino,
+          a aba de inferência passa a usar este modelo imediatamente.
+        </p>
+
+        <div class="field">
+          <label for="csv-file">Arquivo CSV com a coluna Churn e as 11 features</label>
+          <input type="file" id="csv-file" accept=".csv,text/csv"/>
+        </div>
+
+        <button id="train-btn" type="button" onclick="trainModel()">Treinar modelo com CSV</button>
+        <div class="upload-status" id="upload-status"></div>
+      </section>
+
+      <aside class="card" aria-labelledby="training-title">
+        <div class="section-label" id="training-title">Resultado do treino</div>
+        <p class="upload-help">
+          As métricas aparecem aqui após o backend validar o CSV, limpar os dados e treinar o RandomForest.
+        </p>
+        <div class="training-metrics" id="training-metrics"></div>
+      </aside>
+    </div>
+  </section>
+
   <section class="tab-panel" id="tab-documentation" aria-label="Documentação da entrega Semana 5">
     <div class="doc-layout">
       <article class="doc-card full">
@@ -854,10 +938,11 @@
         <h2>Primeira versão funcional para predição de churn</h2>
         <p>
           Esta entrega cobre a análise exploratória da base de clientes e uma primeira versão funcional do sistema:
-          modelo preditivo, API de inferência e interface web simples para simular o risco de cancelamento.
+          upload de CSV, treino do modelo no backend, API de inferência e interface web simples para simular o risco de cancelamento.
         </p>
         <div class="doc-pill-row">
           <span class="doc-pill">EDA</span>
+          <span class="doc-pill">Upload CSV</span>
           <span class="doc-pill">RandomForest</span>
           <span class="doc-pill">FastAPI</span>
           <span class="doc-pill">Vercel + Render</span>
@@ -872,19 +957,19 @@
           <div class="flow-steps">
             <div class="flow-step">
               <strong>Dataset</strong>
-              <span>Base local em dataset/gym_churn_us.csv usada para análise e treino.</span>
+              <span>Usuário envia gym_churn_us.csv pela aba Upload CSV.</span>
             </div>
             <div class="flow-step">
               <strong>Treino</strong>
-              <span>train_model.py limpa os dados, treina o modelo e gera model.pkl.</span>
+              <span>Backend valida colunas, limpa dados, treina RandomForest e calcula métricas.</span>
             </div>
             <div class="flow-step">
               <strong>Backend</strong>
-              <span>FastAPI no Render carrega model.pkl e expõe o endpoint /predict.</span>
+              <span>FastAPI no Render mantém o modelo treinado em runtime e expõe /predict.</span>
             </div>
             <div class="flow-step">
               <strong>Frontend</strong>
-              <span>Vercel envia os dados do formulário e exibe probabilidade e risco.</span>
+              <span>Vercel envia dados para inferência e exibe probabilidade e risco.</span>
             </div>
           </div>
         </article>
@@ -930,11 +1015,11 @@
           <div class="doc-kicker">Modelo</div>
           <h3>Primeira versão preditiva</h3>
           <p>
-            O modelo inicial é um RandomForestClassifier treinado com divisão estratificada de treino e teste.
+            O modelo inicial é um RandomForestClassifier treinado após o upload do CSV, com divisão estratificada de treino e teste.
             A métrica principal para validação é ROC-AUC, acompanhada de precision, recall e classification report.
           </p>
           <div class="callout">
-            Quando o treino final for executado, inserir aqui o ROC-AUC e as principais métricas obtidas.
+            As métricas do treino atual aparecem automaticamente na aba Upload CSV após o backend finalizar o treinamento.
           </div>
         </article>
 
@@ -947,7 +1032,7 @@
             <li>Alto risco: probabilidade a partir de 70%.</li>
           </ul>
           <div class="callout">
-            A tela permite calcular com pelo menos 2 campos. Os campos não informados são preenchidos com valores de referência, então a estimativa fica mais confiável quando mais dados reais são preenchidos.
+            Antes de inferir, envie o CSV na aba Upload CSV. A tela permite calcular com pelo menos 2 campos; os campos não informados são preenchidos com valores de referência derivados do treinamento.
           </div>
         </article>
 
@@ -956,8 +1041,8 @@
           <h3>O que ainda será evoluído</h3>
           <ul>
             <li>Semana 10 deve trazer modelo final e explicabilidade com LLM.</li>
-            <li>Os valores de referência para campos ausentes são uma simplificação para a primeira versão.</li>
-            <li>O modelo ainda precisa ser validado com as métricas finais após o treino definitivo.</li>
+            <li>O modelo treinado via upload fica disponível enquanto o serviço do Render estiver rodando.</li>
+            <li>Se o Render reiniciar ou redeployar, será necessário enviar o CSV novamente.</li>
           </ul>
         </article>
       </div>
@@ -987,6 +1072,81 @@
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.tabTarget === tabName);
     });
+  }
+
+  async function getErrorMessage(res) {
+    try {
+      const data = await res.json();
+      return data.detail || `Erro ${res.status}`;
+    } catch {
+      return `Erro ${res.status}`;
+    }
+  }
+
+  async function trainModel() {
+    const fileInput = document.getElementById("csv-file");
+    const statusEl = document.getElementById("upload-status");
+    const metricsEl = document.getElementById("training-metrics");
+    const btn = document.getElementById("train-btn");
+
+    statusEl.className = "upload-status";
+    statusEl.textContent = "";
+    metricsEl.className = "training-metrics";
+    metricsEl.innerHTML = "";
+
+    if (!fileInput.files.length) {
+      statusEl.className = "upload-status error";
+      statusEl.textContent = "Selecione um arquivo CSV antes de treinar.";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    btn.disabled = true;
+    btn.textContent = "Treinando modelo...";
+
+    try {
+      const res = await fetch(`${API_URL}/train`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error(await getErrorMessage(res));
+
+      const data = await res.json();
+      statusEl.className = "upload-status success";
+      statusEl.textContent = "Modelo treinado com sucesso. A aba de inferência já pode usar este treinamento.";
+      showTrainingMetrics(data.metrics);
+    } catch (err) {
+      statusEl.className = "upload-status error";
+      statusEl.textContent = `Erro ao treinar modelo: ${err.message}`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Treinar modelo com CSV";
+    }
+  }
+
+  function showTrainingMetrics(metrics) {
+    const metricsEl = document.getElementById("training-metrics");
+    const labels = {
+      rows_used: "Linhas usadas",
+      test_rows: "Linhas de teste",
+      churn_rate: "Taxa de churn",
+      roc_auc: "ROC-AUC",
+      accuracy: "Accuracy",
+      precision: "Precision",
+      recall: "Recall",
+    };
+
+    metricsEl.innerHTML = Object.entries(labels).map(([key, label]) => `
+      <div class="metric-card">
+        <div class="metric-label">${label}</div>
+        <div class="metric-value">${metrics[key]}</div>
+        <div class="metric-caption">treino atual</div>
+      </div>
+    `).join("");
+    metricsEl.className = "training-metrics active";
   }
 
   function toggle(field, value, btn) {
@@ -1044,7 +1204,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(`Erro ${res.status}`);
+      if (!res.ok) throw new Error(await getErrorMessage(res));
       const data = await res.json();
       showResult(data, payload);
     } catch (err) {
