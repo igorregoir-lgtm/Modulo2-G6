@@ -1880,9 +1880,10 @@
       if (!res.ok) throw new Error(await obterMensagemErro(res));
 
       const data = await res.json();
+      const dataComFallback = await completarEdaComCsv(data, file);
       statusEl.className = "eda-status success";
       statusEl.textContent = "Dashboard EDA gerado com sucesso a partir do CSV enviado.";
-      exibirDashboardEda(data);
+      exibirDashboardEda(dataComFallback);
     } catch (err) {
       statusEl.className = "eda-status error";
       statusEl.textContent = `Modelo treinado, mas não foi possível gerar o Dashboard EDA: ${err.message}`;
@@ -1906,6 +1907,163 @@
 
     card.append(labelEl, valueEl, captionEl);
     return card;
+  }
+
+  async function completarEdaComCsv(data, file) {
+    const jaTemExtensoes =
+      Array.isArray(data.frequency_scatter) && data.frequency_scatter.length &&
+      Array.isArray(data.survival_curve) && data.survival_curve.length &&
+      Array.isArray(data.cohort_churn) && data.cohort_churn.length &&
+      Array.isArray(data.diagnostic_segments) && data.diagnostic_segments.length;
+
+    if (jaTemExtensoes) return data;
+
+    try {
+      const rows = parsearCsvNumerico(await file.text());
+      const extensoes = criarExtensoesEdaLocal(rows);
+      return { ...data, ...extensoes };
+    } catch (err) {
+      console.warn("Não foi possível calcular extensões locais da EDA.", err);
+      return data;
+    }
+  }
+
+  function parsearCsvNumerico(csvText) {
+    const linhas = csvText.trim().split(/\r?\n/).filter(Boolean);
+    const headers = linhas.shift().split(",").map(header => header.trim());
+
+    return linhas.map(linha => {
+      const valores = linha.split(",");
+      return headers.reduce((row, header, index) => {
+        const numero = Number(valores[index]);
+        row[header] = Number.isFinite(numero) ? numero : valores[index];
+        return row;
+      }, {});
+    }).filter(row =>
+      [
+        "Lifetime",
+        "Avg_class_frequency_current_month",
+        "Avg_class_frequency_total",
+        "Contract_period",
+        "Churn",
+      ].every(key => Number.isFinite(row[key]))
+    );
+  }
+
+  function criarExtensoesEdaLocal(rows) {
+    const rowsComDerivadas = rows.map(row => {
+      const ratio = row.Avg_class_frequency_total === 0
+        ? 0
+        : row.Avg_class_frequency_current_month / row.Avg_class_frequency_total;
+      return {
+        ...row,
+        ratio_freq_atual_vs_lifetime: ratio,
+        flag_early_user: row.Lifetime <= 1 ? 1 : 0,
+        flag_sleeping_dog:
+          row.Lifetime > 6 && row.Avg_class_frequency_current_month < 0.5 ? 1 : 0,
+      };
+    });
+
+    return {
+      frequency_scatter: criarScatterLocal(rowsComDerivadas),
+      survival_curve: criarSobrevivenciaLocal(rowsComDerivadas),
+      cohort_churn: criarCoortesLocais(rowsComDerivadas),
+      diagnostic_segments: criarSegmentosLocais(rowsComDerivadas),
+    };
+  }
+
+  function criarScatterLocal(rows) {
+    const step = Math.max(Math.floor(rows.length / 300), 1);
+    return rows
+      .filter((_, index) => index % step === 0)
+      .slice(0, 300)
+      .map(row => ({
+        x: Number(row.Avg_class_frequency_total.toFixed(3)),
+        y: Number(row.Avg_class_frequency_current_month.toFixed(3)),
+        churn: row.Churn,
+        sleeping_dog: row.flag_sleeping_dog,
+      }));
+  }
+
+  function criarSobrevivenciaLocal(rows) {
+    const lifetimes = [...new Set(rows.map(row => row.Lifetime))].sort((a, b) => a - b);
+    let survivalProbability = 1;
+
+    return lifetimes.map(lifetime => {
+      const atRisk = rows.filter(row => row.Lifetime >= lifetime);
+      const events = rows.filter(row => row.Lifetime === lifetime && row.Churn === 1);
+      const hazard = atRisk.length ? events.length / atRisk.length : 0;
+      survivalProbability *= 1 - hazard;
+      return {
+        lifetime,
+        survival_probability: Number(survivalProbability.toFixed(4)),
+        at_risk: atRisk.length,
+        events: events.length,
+      };
+    });
+  }
+
+  function criarCoortesLocais(rows) {
+    const coortes = [
+      { label: "0-1 mês", test: row => row.Lifetime <= 1 },
+      { label: "2-3 meses", test: row => row.Lifetime >= 2 && row.Lifetime <= 3 },
+      { label: "4-6 meses", test: row => row.Lifetime >= 4 && row.Lifetime <= 6 },
+      { label: "7-12 meses", test: row => row.Lifetime >= 7 && row.Lifetime <= 12 },
+      { label: "13+ meses", test: row => row.Lifetime >= 13 },
+    ];
+
+    return coortes.map(coorte => {
+      const subset = rows.filter(coorte.test);
+      const churnRate = subset.length
+        ? subset.reduce((sum, row) => sum + row.Churn, 0) / subset.length
+        : 0;
+      return {
+        label: coorte.label,
+        churn_rate: Number(churnRate.toFixed(4)),
+        count: subset.length,
+      };
+    });
+  }
+
+  function criarSegmentosLocais(rows) {
+    const totalChurn = Math.max(rows.filter(row => row.Churn === 1).length, 1);
+    const totalBase = Math.max(rows.length, 1);
+    const earlyDroppers = rows.filter(row => row.Lifetime <= 1 && row.Churn === 1);
+    const sleepingDogs = rows.filter(row =>
+      row.Lifetime > 6 && row.Avg_class_frequency_current_month < 0.5
+    );
+    const annualZeroUsage = rows.filter(row =>
+      row.Contract_period === 12 && row.Avg_class_frequency_current_month === 0
+    );
+    const estimatedPipeline = annualZeroUsage.length * 150 * 12;
+
+    return [
+      {
+        key: "early_droppers",
+        label: "Early droppers",
+        count: earlyDroppers.length,
+        percentage: Number((earlyDroppers.length / totalChurn).toFixed(4)),
+        reference: "% do churn total",
+        action: "Onboarding intensivo nos primeiros 30 dias.",
+      },
+      {
+        key: "sleeping_dogs",
+        label: "Sleeping dogs",
+        count: sleepingDogs.length,
+        percentage: Number((sleepingDogs.length / totalBase).toFixed(4)),
+        reference: "% da base total",
+        action: "Reativação cuidadosa para evitar contato excessivo.",
+      },
+      {
+        key: "annual_zero_usage",
+        label: "Anuais com uso zero",
+        count: annualZeroUsage.length,
+        percentage: Number((annualZeroUsage.length / totalBase).toFixed(4)),
+        reference: "% da base total",
+        action: "Monitorar vencimento e criar oferta de retomada.",
+        estimated_pipeline: estimatedPipeline,
+      },
+    ];
   }
 
   function exibirDashboardEda(data) {
