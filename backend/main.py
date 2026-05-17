@@ -2,7 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
-import numpy as np
+import pandas as pd
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR / "model.pkl"
 
 app = FastAPI(title="Gym Churn Prediction API")
 
@@ -12,8 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-model = joblib.load("model.pkl")
 
 FEATURES = [
     "Lifetime",
@@ -28,6 +30,8 @@ FEATURES = [
     "Partner",
     "Near_Location",
 ]
+
+model = joblib.load(MODEL_PATH)
 
 class CustomerData(BaseModel):
     Lifetime: int                              # meses como cliente
@@ -53,7 +57,8 @@ def health_check():
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict(data: CustomerData):
-    features = np.array([[
+    # Mantém a mesma ordem das features usada no treino do modelo.
+    features = pd.DataFrame([[
         data.Lifetime,
         data.Avg_class_frequency_current_month,
         data.Age,
@@ -65,7 +70,7 @@ def predict(data: CustomerData):
         data.Promo_friends,
         data.Partner,
         data.Near_Location,
-    ]])
+    ]], columns=FEATURES)
 
     prob = model.predict_proba(features)[0][1]
 

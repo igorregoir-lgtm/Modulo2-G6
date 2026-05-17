@@ -6,14 +6,19 @@ Execute: python train_model.py
 """
 import pandas as pd
 import joblib
+from pathlib import Path
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, roc_auc_score
 
+BASE_DIR = Path(__file__).resolve().parent
+DATA_PATH = BASE_DIR.parent / "data" / "gym_churn_us.csv"
+MODEL_PATH = BASE_DIR / "model.pkl"
+
 # --------------------------------------------------
 # 1. CARREGA
 # --------------------------------------------------
-df = pd.read_csv("../data/gym_churn_us.csv")
+df = pd.read_csv(DATA_PATH)
 print(f"Shape: {df.shape}")
 print(df.head())
 
@@ -70,5 +75,5 @@ print(f"ROC-AUC: {roc_auc_score(y_test, y_proba):.4f}")
 # --------------------------------------------------
 # 6. SALVA
 # --------------------------------------------------
-joblib.dump(model, "model.pkl")
-print("\nmodelo salvo em model.pkl ✓")
+joblib.dump(model, MODEL_PATH)
+print(f"\nmodelo salvo em {MODEL_PATH} ✓")
