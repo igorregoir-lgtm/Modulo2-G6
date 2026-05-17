@@ -801,6 +801,24 @@
       margin-top: 10px;
     }
 
+    .plot-tooltip {
+      background: var(--text);
+      border-radius: 10px;
+      color: var(--surface);
+      display: none;
+      font-size: 0.74rem;
+      font-weight: 700;
+      left: 0;
+      line-height: 1.45;
+      max-width: 220px;
+      padding: 8px 10px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transform: translate(-50%, calc(-100% - 10px));
+      z-index: 2;
+    }
+
     .plot-legend {
       display: flex;
       flex-wrap: wrap;
@@ -1470,8 +1488,8 @@
             <h3 class="chart-title">Sobrevivência por tempo de assinatura</h3>
             <div class="line-plot" id="survival-chart"></div>
             <p class="plot-caption">
-              Eixo X: meses como cliente. Eixo Y: probabilidade estimada de permanência.
-              Curva aproximada calculada a partir de Lifetime e Churn.
+              Cada ponto agrupa clientes com o mesmo Lifetime. Passe o mouse nos pontos para ver
+              mês, permanência estimada, clientes ainda observados e churns naquele mês.
             </p>
           </article>
 
@@ -2244,6 +2262,19 @@
     return textEl;
   }
 
+  function adicionarLinhaSvg(svg, x1, y1, x2, y2, options = {}) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+    line.setAttribute("stroke", options.stroke || "currentColor");
+    line.setAttribute("opacity", options.opacity || "0.18");
+    if (options.dash) line.setAttribute("stroke-dasharray", options.dash);
+    svg.appendChild(line);
+    return line;
+  }
+
   function obterCorToken(nomeToken) {
     return getComputedStyle(document.documentElement).getPropertyValue(nomeToken).trim();
   }
@@ -2301,11 +2332,16 @@
     const svg = criarSvgPlot("survival-chart");
     if (!rows.length) return;
 
+    const container = document.getElementById("survival-chart");
+    const tooltip = document.createElement("div");
+    tooltip.className = "plot-tooltip";
+    container.appendChild(tooltip);
+
     const brandColor = obterCorToken("--brand");
-    const paddingLeft = 48;
-    const paddingTop = 18;
+    const paddingLeft = 54;
+    const paddingTop = 20;
     const paddingRight = 18;
-    const paddingBottom = 42;
+    const paddingBottom = 46;
     const width = 320 - paddingLeft - paddingRight;
     const height = 220 - paddingTop - paddingBottom;
     const maxLifetime = Math.max(...rows.map(row => row.lifetime), 1);
@@ -2314,6 +2350,22 @@
       const y = paddingTop + height - row.survival_probability * height;
       return `${x},${y}`;
     });
+
+    [0, 0.25, 0.5, 0.75, 1].forEach(tick => {
+      const y = paddingTop + height - tick * height;
+      adicionarLinhaSvg(svg, paddingLeft, y, paddingLeft + width, y);
+      adicionarTextoSvg(svg, `${Math.round(tick * 100)}%`, paddingLeft - 8, y + 3, {
+        anchor: "end",
+        size: "8",
+      });
+    });
+
+    const lifetimeStep = maxLifetime <= 12 ? 2 : 5;
+    for (let lifetime = 0; lifetime <= maxLifetime; lifetime += lifetimeStep) {
+      const x = paddingLeft + (lifetime / maxLifetime) * width;
+      adicionarLinhaSvg(svg, x, paddingTop, x, paddingTop + height, { opacity: "0.10" });
+      adicionarTextoSvg(svg, String(lifetime), x, paddingTop + height + 14, { size: "8" });
+    }
 
     const axis = document.createElementNS("http://www.w3.org/2000/svg", "path");
     axis.setAttribute("d", `M ${paddingLeft} ${paddingTop} V ${paddingTop + height} H ${paddingLeft + width}`);
@@ -2324,8 +2376,6 @@
 
     adicionarTextoSvg(svg, "Lifetime (meses)", paddingLeft + width / 2, 212);
     adicionarTextoSvg(svg, "Permanência estimada", 14, paddingTop + height / 2, { rotate: -90 });
-    adicionarTextoSvg(svg, "0%", paddingLeft - 8, paddingTop + height + 4, { anchor: "end", size: "8" });
-    adicionarTextoSvg(svg, "100%", paddingLeft - 8, paddingTop + 4, { anchor: "end", size: "8" });
     adicionarTextoSvg(svg, String(maxLifetime), paddingLeft + width, paddingTop + height + 12, { size: "8" });
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
@@ -2337,14 +2387,47 @@
     line.setAttribute("stroke-linejoin", "round");
     svg.appendChild(line);
 
-    rows.filter((_, index) => index % 3 === 0).forEach(row => {
+    rows.forEach(row => {
       const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       const x = paddingLeft + (row.lifetime / maxLifetime) * width;
       const y = paddingTop + height - row.survival_probability * height;
       dot.setAttribute("cx", x);
       dot.setAttribute("cy", y);
-      dot.setAttribute("r", "3");
+      dot.setAttribute("r", "3.5");
       dot.setAttribute("fill", brandColor);
+      dot.setAttribute("tabindex", "0");
+      dot.style.cursor = "pointer";
+
+      const tooltipText = [
+        `Lifetime: ${row.lifetime} meses`,
+        `Permanência: ${Math.round(row.survival_probability * 100)}%`,
+        `Clientes observados: ${row.at_risk}`,
+        `Churns no mês: ${row.events}`,
+      ];
+
+      const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+      title.textContent = tooltipText.join(" | ");
+      dot.appendChild(title);
+
+      dot.addEventListener("mouseenter", () => {
+        tooltip.style.display = "block";
+        tooltip.replaceChildren(...tooltipText.map((line, index) => {
+          const span = document.createElement("span");
+          span.style.display = "block";
+          span.style.fontWeight = index === 0 ? "800" : "700";
+          span.textContent = line;
+          return span;
+        }));
+      });
+      dot.addEventListener("mousemove", event => {
+        const rect = container.getBoundingClientRect();
+        tooltip.style.left = `${event.clientX - rect.left}px`;
+        tooltip.style.top = `${event.clientY - rect.top}px`;
+      });
+      dot.addEventListener("mouseleave", () => {
+        tooltip.style.display = "none";
+      });
+
       svg.appendChild(dot);
     });
   }
