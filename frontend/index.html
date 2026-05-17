@@ -1076,8 +1076,8 @@
   </section>
 
   <nav class="tab-nav" aria-label="Navegação da entrega">
-    <button class="tab-btn active" type="button" data-tab-target="inference" onclick="trocarAba('inference')">Inferência</button>
-    <button class="tab-btn" type="button" data-tab-target="upload" onclick="trocarAba('upload')">Upload CSV</button>
+    <button class="tab-btn active" type="button" data-tab-target="upload" onclick="trocarAba('upload')">Upload CSV</button>
+    <button class="tab-btn" type="button" data-tab-target="inference" onclick="trocarAba('inference')">Inferência</button>
     <button class="tab-btn" type="button" data-tab-target="eda" onclick="trocarAba('eda')">Dashboard EDA</button>
     <button class="tab-btn" type="button" data-tab-target="documentation" onclick="trocarAba('documentation')">Documentação</button>
   </nav>
@@ -1119,7 +1119,7 @@
     </div>
   </header>
 
-  <section class="tab-panel active" id="tab-inference" aria-label="Interface de inferência">
+  <section class="tab-panel" id="tab-inference" aria-label="Interface de inferência">
   <div class="layout">
 
     <!-- FORMULÁRIO -->
@@ -1244,7 +1244,7 @@
   </div>
   </section>
 
-  <section class="tab-panel" id="tab-upload" aria-label="Upload de CSV para treino do modelo">
+  <section class="tab-panel active" id="tab-upload" aria-label="Upload de CSV para treino do modelo">
     <div class="upload-layout">
       <section class="card" aria-labelledby="upload-title">
         <div class="section-label" id="upload-title">Upload CSV</div>
