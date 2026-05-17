@@ -516,6 +516,14 @@
     .feature-bars { display: flex; flex-direction: column; gap: 12px; }
     .feat-row { display: flex; flex-direction: column; gap: 6px; }
 
+    .risk-help {
+      color: var(--muted-strong);
+      font-size: 0.84rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 6px 0 14px;
+    }
+
     .feat-meta {
       display: flex;
       justify-content: space-between;
@@ -523,6 +531,17 @@
       font-size: 0.78rem;
       color: var(--muted-strong);
       font-weight: 700;
+    }
+
+    .feat-meta span:last-child {
+      text-align: right;
+    }
+
+    .feat-explain {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.45;
     }
 
     .feat-bar-bg {
@@ -1353,6 +1372,10 @@
 
         <div>
           <div class="section-label">Fatores de risco</div>
+          <p class="risk-help">
+            Estes são os sinais que mais pesaram nesta previsão. A barra mostra o peso relativo no cálculo;
+            o texto compara o cliente com a referência da base treinada.
+          </p>
           <div class="feature-bars" id="feature-bars"></div>
         </div>
 
@@ -2484,11 +2507,13 @@
       ? top_3_drivers.map(driver => ({
           label: driver.label,
           importance: driver.driver_score || driver.importance || 0.1,
-          value: `${driver.value} (${driver.direction})`,
+          value: formatarValorDriver(driver.value),
+          explanation: descreverDriver(driver),
         }))
       : fallbackFeatures.map(feature => ({
           ...feature,
-          value: typeof payload[feature.key] === "number" ? payload[feature.key] : "não informado",
+          value: typeof payload[feature.key] === "number" ? formatarValorDriver(payload[feature.key]) : "não informado",
+          explanation: "Peso histórico dessa variável na separação entre clientes que ficam e cancelam.",
         }));
 
     const barsEl = document.getElementById("feature-bars");
@@ -2503,21 +2528,46 @@
       const valorEl = document.createElement("span");
       const barraFundo = document.createElement("div");
       const barra = document.createElement("div");
+      const explicacao = document.createElement("div");
 
       linha.className = "feat-row";
       meta.className = "feat-meta";
       barraFundo.className = "feat-bar-bg";
       barra.className = "feat-bar-fill";
+      explicacao.className = "feat-explain";
 
       rotulo.textContent = f.label;
       valorEl.textContent = f.value;
+      explicacao.textContent = f.explanation;
       barra.style.width = `${larguraPct}%`;
 
       meta.append(rotulo, valorEl);
       barraFundo.appendChild(barra);
-      linha.append(meta, barraFundo);
+      linha.append(meta, barraFundo, explicacao);
       barsEl.appendChild(linha);
     });
+  }
+
+  function formatarValorDriver(value) {
+    if (typeof value !== "number") return value;
+    return new Intl.NumberFormat("pt-BR", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: Number.isInteger(value) ? 0 : 1,
+    }).format(value);
+  }
+
+  function descreverDriver(driver) {
+    const valor = formatarValorDriver(driver.value);
+    const referencia = formatarValorDriver(driver.reference_value);
+    const direcao = driver.direction;
+
+    if (direcao === "abaixo da referência") {
+      return `Valor do cliente: ${valor}; referência da base: ${referencia}. Está abaixo do padrão usado pelo modelo.`;
+    }
+    if (direcao === "acima da referência") {
+      return `Valor do cliente: ${valor}; referência da base: ${referencia}. Está acima do padrão usado pelo modelo.`;
+    }
+    return `Valor do cliente: ${valor}; referência da base: ${referencia}. Está próximo do padrão da base, mas ainda pesou na previsão.`;
   }
 </script>
 
