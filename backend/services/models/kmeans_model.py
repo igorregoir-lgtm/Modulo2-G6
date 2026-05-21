@@ -30,14 +30,14 @@ def run(df: pd.DataFrame, params: dict) -> dict:
         churn_rate = (
             float(subset["Churn"].mean()) if "Churn" in subset.columns else None
         )
-        profile = {feat: round(float(subset[feat].mean()), 3) for feat in FEATURES}
+        features = {feat: round(float(subset[feat].mean()), 3) for feat in FEATURES}
         segments.append(
             {
                 "cluster": cluster_id,
                 "label": f"Segmento {cluster_id + 1}",
                 "count": int(mask.sum()),
                 "churn_rate": round(churn_rate, 4) if churn_rate is not None else None,
-                "profile": profile,
+                "features": features,
             }
         )
 
@@ -54,19 +54,15 @@ def run(df: pd.DataFrame, params: dict) -> dict:
     for i, seg in enumerate(sorted(valid, key=lambda s: s["churn_rate"], reverse=True)):
         seg["risk_label"] = risk_labels[i] if i < len(risk_labels) else f"Grupo {i+1}"
 
-    # Heatmap: normalized mean per feature per cluster
+    # Heatmap: per-cluster rows with feature columns (matches frontend expectation)
     heatmap = []
-    for feat in FEATURES:
-        values = [round(float(df[df["cluster"] == c][feat].mean()), 3) for c in range(n_clusters)]
-        max_val = max(values) if max(values) != 0 else 1
-        heatmap.append(
-            {
-                "feature": feat,
-                "label": FEATURE_LABELS.get(feat, feat),
-                "values": values,
-                "normalized": [round(v / max_val, 3) for v in values],
-            }
-        )
+    for cluster_id in range(n_clusters):
+        subset = df[df["cluster"] == cluster_id]
+        seg = next((s for s in segments if s["cluster"] == cluster_id), {})
+        row = {"label": seg.get("risk_label") or seg.get("label", f"Segmento {cluster_id + 1}")}
+        for feat in FEATURES:
+            row[feat] = round(float(subset[feat].mean()), 3)
+        heatmap.append(row)
 
     return {
         "model_type": "unsupervised",

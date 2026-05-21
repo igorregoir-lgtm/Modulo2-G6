@@ -1942,7 +1942,13 @@
       </section>
 
       <aside class="card" aria-labelledby="training-title">
-        <div class="section-label" id="training-title">Resultado</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div class="section-label" id="training-title" style="margin-bottom:0;">Resultado</div>
+          <button type="button" id="clear-btn" onclick="limparAnalise()"
+            style="font-size:0.78rem;font-weight:700;padding:5px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface-muted);color:var(--muted-strong);cursor:pointer;display:none;">
+            Limpar análise
+          </button>
+        </div>
         <p class="upload-help" id="result-help-text">
           Após executar a análise, os resultados aparecem aqui e nas abas Segmentação, Personas,
           Priorização e Deck Executivo.
@@ -3416,6 +3422,9 @@
     const helpText = document.getElementById("result-help-text");
     if (helpText) helpText.style.display = "none";
 
+    const clearBtn = document.getElementById("clear-btn");
+    if (clearBtn) clearBtn.style.display = "";
+
     if (data.eda) exibirDashboardEda({ ...data.eda, cleaning: data.eda.cleaning || {} });
     exibirSegmentacao(data);
     exibirPersonas(data.personas || [], data.algorithm);
@@ -3755,6 +3764,39 @@
         limEl.appendChild(item);
       });
     }
+  }
+
+  // ── LIMPAR ANÁLISE ─────────────────────────────────────────
+  function limparAnalise() {
+    ["seg", "personas", "priority", "deck"].forEach(id => {
+      const placeholder = document.getElementById(`${id}-placeholder`);
+      const content = document.getElementById(`${id}-content`);
+      if (placeholder) placeholder.style.display = "";
+      if (content) content.style.display = "none";
+    });
+
+    const metricsEl = document.getElementById("training-metrics");
+    if (metricsEl) {
+      metricsEl.replaceChildren();
+      metricsEl.className = "training-metrics";
+    }
+
+    const statusEl = document.getElementById("upload-status");
+    if (statusEl) statusEl.textContent = "";
+
+    const helpText = document.getElementById("result-help-text");
+    if (helpText) helpText.style.display = "";
+
+    const clearBtn = document.getElementById("clear-btn");
+    if (clearBtn) clearBtn.style.display = "none";
+
+    document.getElementById("hero-customers").textContent = "-";
+    document.getElementById("hero-churn-rate").textContent = "-";
+
+    const fileInput = document.getElementById("csv-file");
+    if (fileInput) fileInput.value = "";
+
+    trocarAba("upload");
   }
 </script>
 
