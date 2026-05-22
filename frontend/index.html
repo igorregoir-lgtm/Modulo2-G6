@@ -719,6 +719,27 @@
       margin-bottom: 14px;
     }
 
+    .chart-subtitle {
+      color: var(--muted-strong);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      margin-top: 16px;
+      text-transform: uppercase;
+    }
+    .chart-subtitle:first-child { margin-top: 0; }
+
+    .chart-two-col {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 640px) {
+      .chart-two-col { grid-template-columns: 1fr; }
+    }
+
     .bar-list {
       display: grid;
       gap: 12px;
@@ -1406,7 +1427,7 @@
       display: block;
       font-size: 0.9rem; font-weight: 800; line-height: 1.5; padding: 14px 16px;
     }
-    .pred-status.waiting { background: var(--surface-soft); color: var(--muted-strong); }
+    .pred-status.waiting { display: none; }
     .pred-status.success { background: var(--low-soft); color: var(--low); }
     .pred-status.error   { background: var(--high-soft); color: var(--high); }
     .pred-dashboard { display: none; gap: 20px; }
@@ -2049,6 +2070,205 @@
         </div>
 
         <article class="chart-card" style="margin-top:24px;">
+          <h3 class="chart-title">EDA · Achado 1 — Contrato e janela crítica de cancelamento</h3>
+          <div class="chart-two-col">
+            <div>
+              <div class="chart-subtitle">Churn rate por tipo de contrato</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Mensal (1m)</span><span>42,3%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:42.3%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Semestral (6m)</span><span>12,5%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:12.5%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Anual (12m)</span><span>2,4%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:2.4%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="chart-subtitle">Churn por meses restantes no contrato</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>0 meses</span><span>82,8%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:82.8%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>≤ 1 mês</span><span>49,1%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:49.1%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>2–3 meses</span><span>18,8%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:18.8%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>4–5 meses</span><span>4,7%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:4.7%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>6–12 meses</span><span>0,8%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:0.8%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>12+ meses</span><span>0,0%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:0%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="chart-card" style="margin-top:24px;">
+          <h3 class="chart-title">EDA · Achado 2 — Fatores de ancoragem social reduzem churn</h3>
+          <div class="chart-two-col">
+            <div>
+              <div class="chart-subtitle">Grupo / desafios coletivos</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Sem grupo</span><span>33,0%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:33%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Com grupo</span><span>17,3%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:17.3%"></div></div>
+                </div>
+              </div>
+              <div class="chart-subtitle">Empresa parceira (convênio)</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Sem convênio</span><span>33,3%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:33.3%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Com convênio</span><span>19,4%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:19.4%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="chart-subtitle">Indicação de amigos</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Sem indicação</span><span>31,3%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:31.3%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>Com indicação</span><span>15,8%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:15.8%"></div></div>
+                </div>
+              </div>
+              <div class="callout" style="margin-top:16px;font-size:0.82rem;">
+                Cada fator de ancoragem social reduz o churn em média <strong>~14 p.p.</strong> A combinação dos três (grupo + indicação + convênio) é o perfil de menor risco da base.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="chart-card" style="margin-top:24px;">
+          <h3 class="chart-title">EDA · Achado 3 — Correlações com churn (todas negativas)</h3>
+          <div class="bar-list">
+            <div class="bar-row">
+              <div class="bar-meta"><span>Lifetime · tempo como cliente</span><span>−0,44</span></div>
+              <div class="bar-track"><div class="bar-value high-risk" style="width:100%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Freq. atual · este mês</span><span>−0,41</span></div>
+              <div class="bar-track"><div class="bar-value high-risk" style="width:93%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Idade</span><span>−0,40</span></div>
+              <div class="bar-track"><div class="bar-value high-risk" style="width:91%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Duração do contrato</span><span>−0,39</span></div>
+              <div class="bar-track"><div class="bar-value high-risk" style="width:89%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Meses até fim do contrato</span><span>−0,38</span></div>
+              <div class="bar-track"><div class="bar-value high-risk" style="width:86%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Freq. histórica</span><span>−0,31</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:70%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Gastos extras</span><span>−0,26</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:59%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Desafios em grupo</span><span>−0,21</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:48%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Indicação de amigos</span><span>−0,18</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:41%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Empresa parceira</span><span>−0,15</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:34%"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-meta"><span>Mora perto da academia</span><span>−0,14</span></div>
+              <div class="bar-track"><div class="bar-value" style="width:32%"></div></div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top:16px;font-size:0.82rem;">
+            Correlação de Pearson com Churn (1 = cancelou). Barras normalizadas pelo valor máximo (−0,44). Quanto mais longa a barra, maior a associação com retenção.
+          </div>
+        </article>
+
+        <article class="chart-card" style="margin-top:24px;">
+          <h3 class="chart-title">Segmentação · Visão geral dos 4 clusters</h3>
+          <div class="chart-two-col">
+            <div>
+              <div class="chart-subtitle">Churn rate por cluster</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C0 · Recém-chegado em fuga</span><span>56%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:56%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C3 · Médio em trânsito</span><span>27%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:27%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C2 · Engajado mensal</span><span>9%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:9%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C1 · Leal anual</span><span>3%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:3%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="chart-subtitle">Tamanho de cada cluster</div>
+              <div class="bar-list">
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C0 · 1.470 clientes</span><span>37%</span></div>
+                  <div class="bar-track"><div class="bar-value high-risk" style="width:37%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C1 · 1.082 clientes</span><span>27%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:27%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C2 · 1.062 clientes</span><span>27%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:27%"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-meta"><span>C3 · 386 clientes</span><span>10%</span></div>
+                  <div class="bar-track"><div class="bar-value" style="width:10%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="chart-card" style="margin-top:24px;">
           <h3 class="chart-title">Personas · Narrativa dos segmentos</h3>
           <div class="persona-grid">
 
@@ -2655,14 +2875,6 @@
       </section>
 
       <div class="doc-grid">
-        <article class="doc-card full rf-highlight-box">
-          <div class="doc-kicker">RandomForest + ROC-AUC</div>
-          <h3>O algoritmo de predição e sua métrica de avaliação</h3>
-          <p class="rf-highlight-text">
-            Utilizamos o <strong>RandomForestClassifier</strong>, um algoritmo consolidado de machine learning disponível na biblioteca scikit-learn. Ele combina múltiplas árvores de decisão para estimar a probabilidade de churn de cada cliente. Sua performance foi avaliada principalmente pelo <strong>ROC-AUC</strong>, métrica adequada para medir a capacidade de diferenciar clientes com maior ou menor risco de churn. O treino acontece após o upload do CSV, com divisão estratificada de treino e teste. As métricas do treino atual aparecem automaticamente na aba <strong>Upload CSV</strong> após o backend finalizar o treinamento.
-          </p>
-        </article>
-
         <article class="doc-card full">
           <div class="doc-kicker">Jornada metodológica</div>
           <h3>Do dado bruto à arquitetura de retenção preditiva</h3>
@@ -2742,6 +2954,14 @@
               <div class="algo-desc">100 estimadores, random_state=42. Treinado no target Churn. Calcula probabilidade por membro, permitindo priorização dentro de cada cluster. ROC-AUC como métrica principal — mede capacidade de separar churners de retidos independente do threshold.</div>
             </div>
           </div>
+        </article>
+
+        <article class="doc-card full rf-highlight-box">
+          <div class="doc-kicker">RandomForest + ROC-AUC</div>
+          <h3>O algoritmo de predição e sua métrica de avaliação</h3>
+          <p class="rf-highlight-text">
+            Utilizamos o <strong>RandomForestClassifier</strong>, um algoritmo consolidado de machine learning disponível na biblioteca scikit-learn. Ele combina múltiplas árvores de decisão para estimar a probabilidade de churn de cada cliente. Sua performance foi avaliada principalmente pelo <strong>ROC-AUC</strong>, métrica adequada para medir a capacidade de diferenciar clientes com maior ou menor risco de churn. O treino acontece após o upload do CSV, com divisão estratificada de treino e teste. As métricas do treino atual aparecem automaticamente na aba <strong>Upload CSV</strong> após o backend finalizar o treinamento.
+          </p>
         </article>
 
         <article class="doc-card">
@@ -3815,8 +4035,8 @@
       const data = await res.json();
       exibirSegmentacao(data);
     } catch (err) {
-      segStatus.className = "seg-status error";
-      segStatus.textContent = `Erro na segmentação: ${err.message}`;
+      segStatus.className = "seg-status waiting";
+      segStatus.textContent = "Segmentação dinâmica indisponível. Dados do artefato exibidos abaixo.";
     }
   }
 
@@ -3921,6 +4141,28 @@
     predDashboard.className = "pred-dashboard active";
   }
 
+  // Pre-fill Inferência tab with a high-churn default profile on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('Lifetime').value = 1;
+    document.getElementById('Age').value = 28;
+    document.getElementById('Contract_period').value = 1;
+    document.getElementById('Month_to_end_contract').value = 0;
+    document.getElementById('Avg_class_frequency_current_month').value = 0.5;
+    document.getElementById('Avg_class_frequency_total').value = 0.8;
+    document.getElementById('Avg_additional_charges_total').value = 100;
+
+    document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+      const attr = btn.getAttribute('onclick') || '';
+      if (attr.includes("'Group_visits', 0") ||
+          attr.includes("'Promo_friends', 0") ||
+          attr.includes("'Partner', 0") ||
+          attr.includes("'Near_Location', 1")) {
+        btn.click();
+      }
+    });
+
+    calcularPredicao().catch(function () {});
+  });
 
 </script>
 
