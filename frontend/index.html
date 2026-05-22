@@ -2769,9 +2769,11 @@
       </section>
       <!-- FIM CONTEÚDO ESTÁTICO -->
 
-      <section class="seg-dashboard" id="seg-dashboard">
-        <div class="cluster-grid" id="cluster-cards"></div>
+      <!-- hidden anchors para JS — mantidos no DOM mas invisíveis -->
+      <div id="cluster-cards" style="display:none" aria-hidden="true"></div>
+      <div id="heatmap-body" style="display:none" aria-hidden="true"></div>
 
+      <section class="seg-dashboard" id="seg-dashboard">
         <div class="chart-grid">
           <article class="chart-card">
             <h3 class="chart-title">Churn rate por cluster</h3>
@@ -2782,17 +2784,6 @@
             <div class="bar-list" id="cluster-size-chart"></div>
           </article>
         </div>
-
-        <article class="chart-card">
-          <h3 class="chart-title">Heatmap de features por cluster <small style="font-weight:600;color:var(--muted);font-size:0.76rem;">(0 = mínimo · 1 = máximo normalizado)</small></h3>
-          <div class="heatmap-wrap">
-            <table class="heatmap-table" id="cluster-heatmap">
-              <thead><tr><th>Feature</th><th>C0 · Em fuga</th><th>C1 · Leal anual</th><th>C2 · Engajado mensal</th><th>C3 · Em trânsito</th></tr></thead>
-              <tbody id="heatmap-body"></tbody>
-            </table>
-          </div>
-          <p class="plot-caption" style="margin-top:10px;">Silhouette score e inércia aparecem no card de métricas do treino após segmentação.</p>
-        </article>
 
         <div class="leitura-block">
           <h3>Leitura dos Segmentos</h3>
