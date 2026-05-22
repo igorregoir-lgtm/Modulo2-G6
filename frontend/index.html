@@ -2773,109 +2773,11 @@
       <div id="cluster-cards" style="display:none" aria-hidden="true"></div>
       <div id="heatmap-body" style="display:none" aria-hidden="true"></div>
 
-      <section class="seg-dashboard" id="seg-dashboard">
-        <div class="chart-grid">
-          <article class="chart-card">
-            <h3 class="chart-title">Churn rate por cluster</h3>
-            <div class="bar-list" id="cluster-churn-chart"></div>
-          </article>
-          <article class="chart-card">
-            <h3 class="chart-title">Tamanho dos clusters</h3>
-            <div class="bar-list" id="cluster-size-chart"></div>
-          </article>
-        </div>
-
-        <div class="leitura-block">
-          <h3>Leitura dos Segmentos</h3>
-          <p>O cluster de maior risco é o <strong>C0 · Recém-chegado em fuga, com ~78% de churn</strong>. Clientes neste segmento ainda não estabeleceram rotina, não têm vínculos sociais na academia e estão nos primeiros meses de contrato. Qualquer fricção — uma semana de falta, uma cobrança inesperada — é suficiente para o cancelamento definitivo.</p>
-          <div class="leitura-grid">
-            <div class="leitura-item">
-              <strong>C0 · Recém-chegado em fuga (~78% churn)</strong>
-              <span>Altíssimo risco. Primeiros meses, sem vínculos. Precisa de onboarding intensivo nos primeiros 30 dias.</span>
-            </div>
-            <div class="leitura-item">
-              <strong>C1 · Leal anual (baixo churn)</strong>
-              <span>Perfil de maior valor. Contrato longo, frequência consistente. Retenção quase orgânica — o risco é de negligência.</span>
-            </div>
-            <div class="leitura-item">
-              <strong>C2 · Engajado mensal (médio-baixo churn)</strong>
-              <span>Engajado mas sem comprometimento de longo prazo. Incentivo para migrar para contrato anual é a alavanca principal.</span>
-            </div>
-            <div class="leitura-item">
-              <strong>C3 · Médio em trânsito (médio churn)</strong>
-              <span>Zona cinza. Nem muito novo, nem muito leal. Frequência irregular. Precisa de atenção antes de entrar em silêncio.</span>
-            </div>
-          </div>
-        </div>
-
-        <article class="chart-card">
-          <h3 class="chart-title">Personas dos segmentos</h3>
-          <div class="persona-grid" id="persona-grid">
-            <div class="persona-card c0">
-              <div class="persona-header">
-                <div class="persona-badge c0">C0</div>
-                <div>
-                  <div class="persona-name">Recém-chegado em fuga</div>
-                  <div class="persona-churn-rate">Churn ~78% · Lifetime ≤ 2 meses</div>
-                </div>
-              </div>
-              <div class="persona-body">Entrou na academia com uma expectativa, mas ainda não encontrou o seu ritmo. Geralmente é o primeiro ou segundo mês de contrato. Sem amigos aqui, sem rotina definida, sem comprometimento de longo prazo. A menor fricção é suficiente para fazê-lo sair — uma semana de falta já virou ex-aluno. O risco é agravado pela ausência de vínculos sociais e pela falta de contrato que crie ancoragem financeira.</div>
-              <div class="persona-tags">
-                <span class="persona-tag">Lifetime curto</span>
-                <span class="persona-tag">Sem grupo</span>
-                <span class="persona-tag">Sem indicação</span>
-                <span class="persona-tag">Contrato mensal</span>
-              </div>
-            </div>
-            <div class="persona-card c1">
-              <div class="persona-header">
-                <div class="persona-badge c1">C1</div>
-                <div>
-                  <div class="persona-name">Leal anual</div>
-                  <div class="persona-churn-rate">Churn baixo · Contrato 12 meses</div>
-                </div>
-              </div>
-              <div class="persona-body">Está aqui faz tempo. Tem contrato anual, frequenta com consistência, participa de aulas coletivas e provavelmente veio por indicação de alguém. É o perfil que mais gosta desta academia e que mais custa a perder. A retenção quase se resolve sozinha — o risco real é de negligência: deixar de nutrir o relacionamento até ele se sentir invisível.</div>
-              <div class="persona-tags">
-                <span class="persona-tag">Lifetime longo</span>
-                <span class="persona-tag">Contrato anual</span>
-                <span class="persona-tag">Aulas em grupo</span>
-                <span class="persona-tag">Alta frequência</span>
-              </div>
-            </div>
-            <div class="persona-card c2">
-              <div class="persona-header">
-                <div class="persona-badge c2">C2</div>
-                <div>
-                  <div class="persona-name">Engajado mensal</div>
-                  <div class="persona-churn-rate">Churn médio-baixo · Contrato 1–3 meses</div>
-                </div>
-              </div>
-              <div class="persona-body">Frequenta bem, mas tem contrato mensal. É engajado nas aulas, gosta do ambiente, mas ainda não fechou um plano de longo prazo. O comprometimento financeiro é o elo mais fraco desta relação. Com o incentivo certo no momento certo, migra para anual — sem ele, pode sair por qualquer oferta concorrente ou por uma semana de ausência sem follow-up.</div>
-              <div class="persona-tags">
-                <span class="persona-tag">Frequência ativa</span>
-                <span class="persona-tag">Contrato curto</span>
-                <span class="persona-tag">Potencial de upgrade</span>
-              </div>
-            </div>
-            <div class="persona-card c3">
-              <div class="persona-header">
-                <div class="persona-badge c3">C3</div>
-                <div>
-                  <div class="persona-name">Médio em trânsito</div>
-                  <div class="persona-churn-rate">Churn médio · Lifetime intermediário</div>
-                </div>
-              </div>
-              <div class="persona-body">Está em uma zona cinza. Não é novo, não é leal. Frequenta de forma irregular, tem algum histórico na academia, mas a relação ainda não se consolidou. Pode ser reativado com esforço moderado — uma campanha de reengajamento, uma meta semanal, um convite para aula coletiva. Sem atenção, silencia gradualmente até o cancelamento.</div>
-              <div class="persona-tags">
-                <span class="persona-tag">Frequência irregular</span>
-                <span class="persona-tag">Histórico médio</span>
-                <span class="persona-tag">Reativável</span>
-              </div>
-            </div>
-          </div>
-        </article>
-      </section>
+      <!-- seg-dashboard: conteúdo removido — wrapper mantido para compatibilidade JS -->
+      <div id="seg-dashboard" style="display:none" aria-hidden="true">
+        <div id="cluster-churn-chart"></div>
+        <div id="cluster-size-chart"></div>
+      </div>
     </div>
   </section>
 
