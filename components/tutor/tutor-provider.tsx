@@ -37,6 +37,26 @@ const SUGESTOES = [
   "Por que não contatar os sleeping dogs?",
 ];
 
+// Escolhe a voz mais natural/humana disponível para pt-BR.
+// Prioriza vozes neurais/online ("Natural", "Neural", "Online") — Edge/Chrome
+// modernos expõem vozes muito mais naturais que a padrão do sistema.
+function pickPtVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
+  if (!voices || voices.length === 0) return null;
+  const pt = voices.filter((v) => /^pt([-_]?br)?/i.test(v.lang));
+  const pool = pt.length ? pt : voices;
+  const score = (v: SpeechSynthesisVoice) => {
+    const n = (v.name || "").toLowerCase();
+    let s = 0;
+    if (/natural|neural|online|premium|enhanced/.test(n)) s += 9;
+    if (/google/.test(n)) s += 5;
+    if (/(thalita|francisca|ant[oô]nio|brenda|let[ií]cia|giovanna|manuela|yara|maria|luciana|joana|camila|vit[oó]ria|helena|fernanda|felipe|daniel)/.test(n)) s += 3;
+    if (/pt[-_]?br/i.test(v.lang)) s += 3;
+    if (v.localService === false) s += 2; // vozes online costumam ser mais naturais
+    return s;
+  };
+  return [...pool].sort((a, b) => score(b) - score(a))[0] ?? null;
+}
+
 export function TutorProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const screen = SCREEN_LABELS[pathname] ?? "o sistema";
@@ -56,6 +76,7 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recRef = React.useRef<any>(null);
+  const voiceRef = React.useRef<SpeechSynthesisVoice | null>(null);
 
   React.useEffect(() => {
     messagesRef.current = messages;
@@ -76,6 +97,19 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
     setVoiceSupported(!!(w.SpeechRecognition || w.webkitSpeechRecognition));
   }, []);
 
+  // Carrega e escolhe a melhor voz pt-BR (lista chega de forma assíncrona).
+  React.useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const synth = window.speechSynthesis;
+    const refresh = () => {
+      const v = pickPtVoice(synth.getVoices());
+      if (v) voiceRef.current = v;
+    };
+    refresh();
+    synth.addEventListener?.("voiceschanged", refresh);
+    return () => synth.removeEventListener?.("voiceschanged", refresh);
+  }, []);
+
   React.useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages, loading]);
@@ -83,11 +117,19 @@ export function TutorProvider({ children }: { children: React.ReactNode }) {
   function speak(text: string) {
     try {
       if (typeof window === "undefined" || !window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
+      const synth = window.speechSynthesis;
+      synth.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = "pt-BR";
-      u.rate = 1.03;
-      window.speechSynthesis.speak(u);
+      const voice = voiceRef.current ?? pickPtVoice(synth.getVoices());
+      if (voice) {
+        u.voice = voice;
+        u.lang = voice.lang;
+      } else {
+        u.lang = "pt-BR";
+      }
+      u.rate = 1.0; // ritmo natural
+      u.pitch = 1.0;
+      synth.speak(u);
     } catch {
       /* TTS indisponível */
     }
