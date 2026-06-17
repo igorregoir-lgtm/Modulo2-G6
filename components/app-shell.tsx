@@ -153,24 +153,32 @@ export function AppShell({
           </div>
 
           <div className="ml-auto flex items-center gap-3">
-            <Badge variant="outline" className="border-white/25 text-[var(--paper)]">
-              {ROLE_LABEL[role]}
-            </Badge>
-            <div className="hidden items-center gap-2 sm:flex">
-              <Avatar className="h-8 w-8 bg-[var(--accent)]">
-                <AvatarFallback className="bg-[var(--accent)] text-white">{initials}</AvatarFallback>
-              </Avatar>
-              <span className="max-w-[12rem] truncate text-sm text-[var(--cloud)]">{email}</span>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={logout}
-              className="text-[var(--paper)] hover:bg-white/10"
-            >
-              <LogOut className="h-4 w-4" />
-              <span className="hidden sm:inline">Sair</span>
-            </Button>
+            {email ? (
+              <>
+                <Badge variant="outline" className="border-white/25 text-[var(--paper)]">
+                  {ROLE_LABEL[role]}
+                </Badge>
+                <div className="hidden items-center gap-2 sm:flex">
+                  <Avatar className="h-8 w-8 bg-[var(--accent)]">
+                    <AvatarFallback className="bg-[var(--accent)] text-white">{initials}</AvatarFallback>
+                  </Avatar>
+                  <span className="max-w-[12rem] truncate text-sm text-[var(--cloud)]">{email}</span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={logout}
+                  className="text-[var(--paper)] hover:bg-white/10"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span className="hidden sm:inline">Sair</span>
+                </Button>
+              </>
+            ) : (
+              <Badge variant="outline" className="border-white/25 text-[var(--paper)]">
+                Acesso aberto
+              </Badge>
+            )}
           </div>
         </div>
       </header>

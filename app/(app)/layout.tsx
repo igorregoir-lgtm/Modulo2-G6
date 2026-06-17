@@ -1,17 +1,17 @@
-import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/auth";
 import { AppShell } from "@/components/app-shell";
 
-export default async function ProtectedLayout({
+// Acesso aberto: não exige login. Se houver sessão, usa o perfil; caso
+// contrário, entra como convidado com visão completa (role 'admin').
+export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const user = await getSessionUser();
-  if (!user) redirect("/login");
 
   return (
-    <AppShell role={user.role} email={user.email}>
+    <AppShell role={user?.role ?? "admin"} email={user?.email ?? null}>
       {children}
     </AppShell>
   );

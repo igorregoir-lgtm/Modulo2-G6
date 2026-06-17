@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, writeAudit } from "@/lib/supabase/admin";
 import { getSessionUser } from "@/lib/auth";
 import { getScoredCustomer } from "@/lib/scoring";
@@ -51,11 +50,13 @@ export async function POST(req: Request) {
       /* customer table empty / not seeded — sample-only mode */
     }
 
+    // Acesso aberto: persiste via admin client (service role, ignora RLS);
+    // created_by fica nulo quando não há usuário logado.
     let persisted = false;
-    if (dbCustomerId && user) {
+    if (dbCustomerId) {
       try {
-        const supabase = await createClient();
-        const { error } = await supabase.from("intervention").insert({
+        const admin = createAdminClient();
+        const { error } = await admin.from("intervention").insert({
           customer_id: dbCustomerId,
           archetype: archetype ?? null,
           offer: body.offer ?? null,
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
           copy: body.copy ?? null,
           timing: body.timing ?? null,
           status: blocked ? "bloqueada" : "aplicada",
-          created_by: user.id,
+          created_by: user?.id ?? null,
         });
         persisted = !error;
         if (error) console.error("[apply-intervention] insert error:", error.message);
