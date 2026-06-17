@@ -1,0 +1,2766 @@
+{
+  "n": 4000,
+  "churn_rate_dataset": 0.2652,
+  "churn_rate_monthly_case": 0.102,
+  "avg_score": 0.2645,
+  "tier_split": [
+    {
+      "tier": "baixo",
+      "count": 2864
+    },
+    {
+      "tier": "medio",
+      "count": 85
+    },
+    {
+      "tier": "alto",
+      "count": 1051
+    },
+    {
+      "tier": "critico",
+      "count": 0
+    }
+  ],
+  "archetype_split": [
+    {
+      "archetype": "preco_sensivel",
+      "count": 179
+    },
+    {
+      "archetype": "desengajado_conteudo",
+      "count": 3177
+    },
+    {
+      "archetype": "early_dropper",
+      "count": 486
+    },
+    {
+      "archetype": "sleeping_dog",
+      "count": 54
+    },
+    {
+      "archetype": "concorrente_driven",
+      "count": 104
+    }
+  ],
+  "by_contract": [
+    {
+      "contract": 1,
+      "label": "Mensal",
+      "total": 2207,
+      "churn": 934,
+      "churn_rate": 0.423
+    },
+    {
+      "contract": 6,
+      "label": "Semestral",
+      "total": 833,
+      "churn": 104,
+      "churn_rate": 0.125
+    },
+    {
+      "contract": 12,
+      "label": "Anual",
+      "total": 960,
+      "churn": 23,
+      "churn_rate": 0.024
+    }
+  ],
+  "by_cohort": [
+    {
+      "cohort": "0-2m",
+      "total": 1940,
+      "churn": 974,
+      "churn_rate": 0.502
+    },
+    {
+      "cohort": "3-5m",
+      "total": 1146,
+      "churn": 81,
+      "churn_rate": 0.071
+    },
+    {
+      "cohort": "6-8m",
+      "total": 498,
+      "churn": 5,
+      "churn_rate": 0.01
+    },
+    {
+      "cohort": "9-12m",
+      "total": 277,
+      "churn": 1,
+      "churn_rate": 0.004
+    },
+    {
+      "cohort": "12m+",
+      "total": 139,
+      "churn": 0,
+      "churn_rate": 0.0
+    }
+  ],
+  "freq_dist": [
+    {
+      "bucket": "0",
+      "churn": 134,
+      "retained": 47
+    },
+    {
+      "bucket": "0-1",
+      "churn": 404,
+      "retained": 458
+    },
+    {
+      "bucket": "1-2",
+      "churn": 392,
+      "retained": 919
+    },
+    {
+      "bucket": "2-3",
+      "churn": 118,
+      "retained": 997
+    },
+    {
+      "bucket": "3+",
+      "churn": 13,
+      "retained": 518
+    }
+  ],
+  "correlation": [
+    {
+      "x": "Lifetime",
+      "y": "Lifetime",
+      "value": 1.0
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Lifetime",
+      "value": 0.18
+    },
+    {
+      "x": "Contrato",
+      "y": "Lifetime",
+      "value": 0.17
+    },
+    {
+      "x": "Adicionais",
+      "y": "Lifetime",
+      "value": 0.08
+    },
+    {
+      "x": "Idade",
+      "y": "Lifetime",
+      "value": 0.16
+    },
+    {
+      "x": "Churn",
+      "y": "Lifetime",
+      "value": -0.44
+    },
+    {
+      "x": "Lifetime",
+      "y": "Freq_atual",
+      "value": 0.18
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Freq_atual",
+      "value": 1.0
+    },
+    {
+      "x": "Contrato",
+      "y": "Freq_atual",
+      "value": 0.16
+    },
+    {
+      "x": "Adicionais",
+      "y": "Freq_atual",
+      "value": 0.08
+    },
+    {
+      "x": "Idade",
+      "y": "Freq_atual",
+      "value": 0.18
+    },
+    {
+      "x": "Churn",
+      "y": "Freq_atual",
+      "value": -0.41
+    },
+    {
+      "x": "Lifetime",
+      "y": "Contrato",
+      "value": 0.17
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Contrato",
+      "value": 0.16
+    },
+    {
+      "x": "Contrato",
+      "y": "Contrato",
+      "value": 1.0
+    },
+    {
+      "x": "Adicionais",
+      "y": "Contrato",
+      "value": 0.11
+    },
+    {
+      "x": "Idade",
+      "y": "Contrato",
+      "value": 0.14
+    },
+    {
+      "x": "Churn",
+      "y": "Contrato",
+      "value": -0.39
+    },
+    {
+      "x": "Lifetime",
+      "y": "Adicionais",
+      "value": 0.08
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Adicionais",
+      "value": 0.08
+    },
+    {
+      "x": "Contrato",
+      "y": "Adicionais",
+      "value": 0.11
+    },
+    {
+      "x": "Adicionais",
+      "y": "Adicionais",
+      "value": 1.0
+    },
+    {
+      "x": "Idade",
+      "y": "Adicionais",
+      "value": 0.08
+    },
+    {
+      "x": "Churn",
+      "y": "Adicionais",
+      "value": -0.2
+    },
+    {
+      "x": "Lifetime",
+      "y": "Idade",
+      "value": 0.16
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Idade",
+      "value": 0.18
+    },
+    {
+      "x": "Contrato",
+      "y": "Idade",
+      "value": 0.14
+    },
+    {
+      "x": "Adicionais",
+      "y": "Idade",
+      "value": 0.08
+    },
+    {
+      "x": "Idade",
+      "y": "Idade",
+      "value": 1.0
+    },
+    {
+      "x": "Churn",
+      "y": "Idade",
+      "value": -0.4
+    },
+    {
+      "x": "Lifetime",
+      "y": "Churn",
+      "value": -0.44
+    },
+    {
+      "x": "Freq_atual",
+      "y": "Churn",
+      "value": -0.41
+    },
+    {
+      "x": "Contrato",
+      "y": "Churn",
+      "value": -0.39
+    },
+    {
+      "x": "Adicionais",
+      "y": "Churn",
+      "value": -0.2
+    },
+    {
+      "x": "Idade",
+      "y": "Churn",
+      "value": -0.4
+    },
+    {
+      "x": "Churn",
+      "y": "Churn",
+      "value": 1.0
+    }
+  ],
+  "survival": [
+    {
+      "lifetime": 0,
+      "retention": 0.172
+    },
+    {
+      "lifetime": 1,
+      "retention": 0.509
+    },
+    {
+      "lifetime": 2,
+      "retention": 0.743
+    },
+    {
+      "lifetime": 3,
+      "retention": 0.898
+    },
+    {
+      "lifetime": 4,
+      "retention": 0.94
+    },
+    {
+      "lifetime": 5,
+      "retention": 0.971
+    },
+    {
+      "lifetime": 6,
+      "retention": 0.982
+    },
+    {
+      "lifetime": 7,
+      "retention": 1.0
+    },
+    {
+      "lifetime": 8,
+      "retention": 0.991
+    },
+    {
+      "lifetime": 9,
+      "retention": 0.99
+    },
+    {
+      "lifetime": 10,
+      "retention": 1.0
+    },
+    {
+      "lifetime": 11,
+      "retention": 1.0
+    },
+    {
+      "lifetime": 12,
+      "retention": 1.0
+    }
+  ],
+  "scatter": [
+    {
+      "freq_total": 1.4,
+      "freq_current": 1.61,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.92,
+      "freq_current": 1.09,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.89,
+      "freq_current": 2.81,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.13,
+      "freq_current": 2.15,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.65,
+      "freq_current": 1.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.72,
+      "freq_current": 1.34,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.94,
+      "freq_current": 2.01,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.38,
+      "freq_current": 1.83,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.54,
+      "freq_current": 1.62,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.57,
+      "freq_current": 1.29,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.58,
+      "freq_current": 0.48,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.87,
+      "freq_current": 2.81,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.49,
+      "freq_current": 0.39,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.0,
+      "freq_current": 0.79,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.78,
+      "freq_current": 3.03,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.37,
+      "freq_current": 1.38,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.21,
+      "freq_current": 0.91,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.08,
+      "freq_current": 1.07,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.55,
+      "freq_current": 0.64,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.98,
+      "freq_current": 1.34,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.16,
+      "freq_current": 3.14,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.64,
+      "freq_current": 1.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.49,
+      "freq_current": 1.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.36,
+      "freq_current": 1.33,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.24,
+      "freq_current": 1.13,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.06,
+      "freq_current": 0.97,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.01,
+      "freq_current": 1.81,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.51,
+      "freq_current": 3.39,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.71,
+      "freq_current": 1.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.08,
+      "freq_current": 2.26,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.03,
+      "freq_current": 0.97,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.43,
+      "freq_current": 1.49,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.06,
+      "freq_current": 1.72,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.62,
+      "freq_current": 2.5,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.24,
+      "freq_current": 3.35,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.02,
+      "freq_current": 1.02,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.03,
+      "freq_current": 1.37,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.52,
+      "freq_current": 0.57,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.92,
+      "freq_current": 0.33,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.96,
+      "freq_current": 1.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.12,
+      "freq_current": 0.62,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.8,
+      "freq_current": 2.81,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.42,
+      "freq_current": 2.41,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.27,
+      "freq_current": 2.08,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 4.07,
+      "freq_current": 4.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.39,
+      "freq_current": 2.11,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.71,
+      "freq_current": 0.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.71,
+      "freq_current": 1.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.28,
+      "freq_current": 2.53,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.81,
+      "freq_current": 2.86,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.72,
+      "freq_current": 0.58,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.13,
+      "freq_current": 2.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.1,
+      "freq_current": 3.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.44,
+      "freq_current": 0.56,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.37,
+      "freq_current": 2.32,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.74,
+      "freq_current": 0.37,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.35,
+      "freq_current": 2.32,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.16,
+      "freq_current": 1.58,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.75,
+      "freq_current": 2.92,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.82,
+      "freq_current": 1.6,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.89,
+      "freq_current": 2.9,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.7,
+      "freq_current": 2.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.53,
+      "freq_current": 1.43,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.65,
+      "freq_current": 2.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.87,
+      "freq_current": 3.87,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.85,
+      "freq_current": 3.05,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.02,
+      "freq_current": 0.89,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.1,
+      "freq_current": 2.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.98,
+      "freq_current": 2.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.59,
+      "freq_current": 0.11,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.25,
+      "freq_current": 2.19,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.83,
+      "freq_current": 0.81,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.11,
+      "freq_current": 1.06,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.94,
+      "freq_current": 3.01,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.3,
+      "freq_current": 1.35,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.39,
+      "freq_current": 1.48,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.69,
+      "freq_current": 0.54,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.15,
+      "freq_current": 0.69,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.25,
+      "freq_current": 3.15,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.48,
+      "freq_current": 1.55,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.12,
+      "freq_current": 1.14,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.35,
+      "freq_current": 1.48,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.83,
+      "freq_current": 1.77,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.09,
+      "freq_current": 3.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.48,
+      "freq_current": 0.34,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 3.06,
+      "freq_current": 2.99,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.34,
+      "freq_current": 2.35,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.16,
+      "freq_current": 1.21,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.37,
+      "freq_current": 0.63,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.75,
+      "freq_current": 2.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.37,
+      "freq_current": 0.41,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.44,
+      "freq_current": 2.47,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.39,
+      "freq_current": 3.09,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.67,
+      "freq_current": 0.56,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.92,
+      "freq_current": 1.53,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 4.7,
+      "freq_current": 4.79,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.91,
+      "freq_current": 0.9,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.61,
+      "freq_current": 1.49,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.37,
+      "freq_current": 2.27,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.25,
+      "freq_current": 0.2,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.08,
+      "freq_current": 3.26,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.75,
+      "freq_current": 0.76,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.98,
+      "freq_current": 1.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.36,
+      "freq_current": 2.41,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.08,
+      "freq_current": 3.14,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.62,
+      "freq_current": 3.45,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.89,
+      "freq_current": 3.03,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.32,
+      "freq_current": 0.42,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.13,
+      "freq_current": 0.23,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.25,
+      "freq_current": 1.31,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.65,
+      "freq_current": 1.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.72,
+      "freq_current": 2.55,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.18,
+      "freq_current": 0.57,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 4.56,
+      "freq_current": 4.53,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.1,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.22,
+      "freq_current": 0.31,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 1.58,
+      "freq_current": 1.54,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.36,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.53,
+      "freq_current": 2.01,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.76,
+      "freq_current": 2.68,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.62,
+      "freq_current": 1.64,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.79,
+      "freq_current": 1.84,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.72,
+      "freq_current": 0.59,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.59,
+      "freq_current": 2.64,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.52,
+      "freq_current": 2.6,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.0,
+      "freq_current": 1.97,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.53,
+      "freq_current": 2.6,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.06,
+      "freq_current": 3.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.15,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.61,
+      "freq_current": 0.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.07,
+      "freq_current": 2.08,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.47,
+      "freq_current": 2.48,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.25,
+      "freq_current": 2.57,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.34,
+      "freq_current": 3.36,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.48,
+      "freq_current": 2.55,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.09,
+      "freq_current": 1.91,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.18,
+      "freq_current": 3.25,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.34,
+      "freq_current": 2.28,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.65,
+      "freq_current": 0.76,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.95,
+      "freq_current": 1.93,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.38,
+      "freq_current": 3.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.8,
+      "freq_current": 0.81,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.97,
+      "freq_current": 1.05,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.26,
+      "freq_current": 3.3,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.17,
+      "freq_current": 1.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.32,
+      "freq_current": 3.27,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.68,
+      "freq_current": 1.64,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.8,
+      "freq_current": 1.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.37,
+      "freq_current": 0.44,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 1.74,
+      "freq_current": 1.16,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.22,
+      "freq_current": 1.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.41,
+      "freq_current": 0.27,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.26,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.64,
+      "freq_current": 1.76,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.58,
+      "freq_current": 3.57,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.37,
+      "freq_current": 1.2,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.74,
+      "freq_current": 1.07,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.08,
+      "freq_current": 1.76,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.88,
+      "freq_current": 1.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.62,
+      "freq_current": 0.71,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.67,
+      "freq_current": 1.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.66,
+      "freq_current": 0.61,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.92,
+      "freq_current": 2.55,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.03,
+      "freq_current": 2.61,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.2,
+      "freq_current": 2.21,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.85,
+      "freq_current": 3.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.02,
+      "freq_current": 0.64,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.87,
+      "freq_current": 1.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.23,
+      "freq_current": 2.17,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.47,
+      "freq_current": 2.45,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.5,
+      "freq_current": 0.61,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.6,
+      "freq_current": 3.72,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.02,
+      "freq_current": 1.27,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.69,
+      "freq_current": 3.89,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.08,
+      "freq_current": 2.18,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.08,
+      "freq_current": 2.09,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.63,
+      "freq_current": 2.56,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.46,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.81,
+      "freq_current": 1.92,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.02,
+      "freq_current": 1.77,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.6,
+      "freq_current": 0.41,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.23,
+      "freq_current": 1.34,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.34,
+      "freq_current": 2.38,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.18,
+      "freq_current": 0.37,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.59,
+      "freq_current": 1.54,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.22,
+      "freq_current": 2.37,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.02,
+      "freq_current": 3.03,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.4,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.66,
+      "freq_current": 2.62,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.5,
+      "freq_current": 0.45,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.56,
+      "freq_current": 2.57,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.12,
+      "freq_current": 2.22,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.67,
+      "freq_current": 1.14,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.28,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.29,
+      "freq_current": 1.09,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.97,
+      "freq_current": 2.94,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.48,
+      "freq_current": 1.38,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.29,
+      "freq_current": 1.12,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.14,
+      "freq_current": 0.01,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.14,
+      "freq_current": 0.13,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.66,
+      "freq_current": 2.61,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.76,
+      "freq_current": 0.56,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.8,
+      "freq_current": 1.85,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.04,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.24,
+      "freq_current": 1.38,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.08,
+      "freq_current": 3.16,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.18,
+      "freq_current": 1.21,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.63,
+      "freq_current": 0.61,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.37,
+      "freq_current": 1.44,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.69,
+      "freq_current": 2.92,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.24,
+      "freq_current": 1.79,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.41,
+      "freq_current": 2.6,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.95,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.54,
+      "freq_current": 2.68,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.64,
+      "freq_current": 2.66,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 4.1,
+      "freq_current": 4.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.09,
+      "freq_current": 3.02,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.26,
+      "freq_current": 1.31,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.96,
+      "freq_current": 3.04,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.41,
+      "freq_current": 3.42,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.09,
+      "freq_current": 0.23,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.06,
+      "freq_current": 2.93,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.06,
+      "freq_current": 2.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.45,
+      "freq_current": 1.58,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.28,
+      "freq_current": 0.22,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 4.01,
+      "freq_current": 4.05,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.46,
+      "freq_current": 1.51,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.99,
+      "freq_current": 0.15,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.37,
+      "freq_current": 3.35,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.96,
+      "freq_current": 0.74,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.44,
+      "freq_current": 2.46,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.15,
+      "freq_current": 3.23,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.75,
+      "freq_current": 1.02,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.11,
+      "freq_current": 2.14,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.67,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.73,
+      "freq_current": 2.73,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.47,
+      "freq_current": 1.38,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.69,
+      "freq_current": 1.64,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.26,
+      "freq_current": 0.39,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.32,
+      "freq_current": 2.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.95,
+      "freq_current": 2.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.31,
+      "freq_current": 1.46,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.16,
+      "freq_current": 1.18,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.94,
+      "freq_current": 2.03,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.53,
+      "freq_current": 2.45,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.59,
+      "freq_current": 2.34,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.97,
+      "freq_current": 0.55,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.5,
+      "freq_current": 1.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.74,
+      "freq_current": 0.72,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.79,
+      "freq_current": 2.72,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.74,
+      "freq_current": 2.8,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.96,
+      "freq_current": 2.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.26,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.22,
+      "freq_current": 3.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.78,
+      "freq_current": 1.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.71,
+      "freq_current": 0.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.94,
+      "freq_current": 0.36,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.5,
+      "freq_current": 0.79,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.78,
+      "freq_current": 0.52,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.76,
+      "freq_current": 0.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.99,
+      "freq_current": 1.6,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.6,
+      "freq_current": 0.51,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.23,
+      "freq_current": 2.21,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.94,
+      "freq_current": 2.09,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.33,
+      "freq_current": 2.27,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.65,
+      "freq_current": 3.71,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.97,
+      "freq_current": 2.93,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.17,
+      "freq_current": 3.16,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.72,
+      "freq_current": 1.58,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.11,
+      "freq_current": 1.06,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.21,
+      "freq_current": 0.61,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.18,
+      "freq_current": 0.09,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.99,
+      "freq_current": 0.93,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.21,
+      "freq_current": 1.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.68,
+      "freq_current": 3.67,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.47,
+      "freq_current": 3.37,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.51,
+      "freq_current": 3.31,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.91,
+      "freq_current": 2.78,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.05,
+      "freq_current": 0.94,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.69,
+      "freq_current": 1.66,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.77,
+      "freq_current": 0.43,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.6,
+      "freq_current": 2.74,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.47,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.17,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.24,
+      "freq_current": 2.11,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.21,
+      "freq_current": 0.21,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 2.27,
+      "freq_current": 2.26,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.85,
+      "freq_current": 2.56,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.59,
+      "freq_current": 3.03,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.47,
+      "freq_current": 3.38,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.94,
+      "freq_current": 3.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.03,
+      "freq_current": 2.93,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.41,
+      "freq_current": 1.15,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.96,
+      "freq_current": 2.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.79,
+      "freq_current": 0.24,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.13,
+      "freq_current": 1.16,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.49,
+      "freq_current": 1.06,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.14,
+      "freq_current": 1.51,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.78,
+      "freq_current": 1.62,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.25,
+      "freq_current": 3.32,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.31,
+      "freq_current": 3.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.92,
+      "freq_current": 1.02,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.49,
+      "freq_current": 1.42,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.13,
+      "freq_current": 2.27,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.32,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.35,
+      "freq_current": 1.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.66,
+      "freq_current": 1.48,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.29,
+      "freq_current": 1.25,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.8,
+      "freq_current": 1.69,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.53,
+      "freq_current": 1.5,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.7,
+      "freq_current": 1.69,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.75,
+      "freq_current": 2.77,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.98,
+      "freq_current": 3.85,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.18,
+      "freq_current": 1.82,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.64,
+      "freq_current": 0.97,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.42,
+      "freq_current": 0.24,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.47,
+      "freq_current": 3.65,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.94,
+      "freq_current": 0.42,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.51,
+      "freq_current": 2.53,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.07,
+      "freq_current": 3.11,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.62,
+      "freq_current": 3.43,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.21,
+      "freq_current": 1.07,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.82,
+      "freq_current": 2.82,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.62,
+      "freq_current": 2.67,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.19,
+      "freq_current": 2.2,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.63,
+      "freq_current": 0.54,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.65,
+      "freq_current": 0.75,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.79,
+      "freq_current": 2.7,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.72,
+      "freq_current": 1.66,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.89,
+      "freq_current": 0.9,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.55,
+      "freq_current": 2.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.76,
+      "freq_current": 0.63,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.44,
+      "freq_current": 2.47,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.71,
+      "freq_current": 2.94,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.38,
+      "freq_current": 2.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.36,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.66,
+      "freq_current": 0.45,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.82,
+      "freq_current": 1.85,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.87,
+      "freq_current": 1.95,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.24,
+      "freq_current": 2.28,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.59,
+      "freq_current": 1.6,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.81,
+      "freq_current": 0.91,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.64,
+      "freq_current": 1.77,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 4.04,
+      "freq_current": 3.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.7,
+      "freq_current": 2.62,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.4,
+      "freq_current": 3.49,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.41,
+      "freq_current": 1.51,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.47,
+      "freq_current": 2.51,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.8,
+      "freq_current": 2.8,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.91,
+      "freq_current": 0.9,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.77,
+      "freq_current": 0.45,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.73,
+      "freq_current": 1.62,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.15,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.63,
+      "freq_current": 0.61,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.49,
+      "freq_current": 1.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.52,
+      "freq_current": 0.51,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.06,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 2.38,
+      "freq_current": 2.34,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.42,
+      "freq_current": 1.9,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.06,
+      "freq_current": 0.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.69,
+      "freq_current": 1.71,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.04,
+      "freq_current": 0.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.37,
+      "freq_current": 0.65,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.74,
+      "freq_current": 2.01,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.94,
+      "freq_current": 0.84,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 5.14,
+      "freq_current": 4.96,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.61,
+      "freq_current": 2.67,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.28,
+      "freq_current": 1.41,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.62,
+      "freq_current": 3.67,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.4,
+      "freq_current": 2.03,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.59,
+      "freq_current": 2.52,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.57,
+      "freq_current": 0.59,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.75,
+      "freq_current": 0.72,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.48,
+      "freq_current": 1.7,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.17,
+      "freq_current": 1.98,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.71,
+      "freq_current": 1.53,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.18,
+      "freq_current": 1.18,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.92,
+      "freq_current": 2.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.24,
+      "freq_current": 0.19,
+      "churned": false,
+      "sleeping_dog": true
+    },
+    {
+      "freq_total": 1.5,
+      "freq_current": 1.46,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.41,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.19,
+      "freq_current": 2.03,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.37,
+      "freq_current": 3.39,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.69,
+      "freq_current": 0.0,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.42,
+      "freq_current": 1.28,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.0,
+      "freq_current": 0.0,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.8,
+      "freq_current": 3.83,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.37,
+      "freq_current": 0.83,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.06,
+      "freq_current": 2.07,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.29,
+      "freq_current": 1.61,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.93,
+      "freq_current": 1.07,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 0.56,
+      "freq_current": 0.56,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.98,
+      "freq_current": 2.86,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 1.25,
+      "freq_current": 1.4,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.79,
+      "freq_current": 2.42,
+      "churned": true,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 3.08,
+      "freq_current": 3.08,
+      "churned": false,
+      "sleeping_dog": false
+    },
+    {
+      "freq_total": 2.0,
+      "freq_current": 1.91,
+      "churned": false,
+      "sleeping_dog": false
+    }
+  ]
+}
