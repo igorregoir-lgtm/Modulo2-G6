@@ -5,7 +5,8 @@ educacional e empático** (PBL), para uma assinatura de bem-estar/fitness (case 
 Artefato 2 — Trilha de Tecnologia (Inteli, Módulo 2).
 
 🔗 **Sistema no ar:** https://vitaliza-retencao.vercel.app
-🔐 **Login de demonstração:** `demo@vitaliza.app` / `Vitaliza#Demo2026` (conta demo, dados anonimizados)
+🔓 **Acesso aberto** — sem necessidade de login (modo demonstração). O gate de autenticação por
+perfil (CS/Exec) existe no código (`lib/supabase/middleware.ts`, `lib/auth.ts`) e pode ser reativado.
 📄 **Especificação:** [`docs/SPEC.md`](docs/SPEC.md) · **Decisões:** [`docs/decisions/`](docs/decisions) ·
 **Rastreabilidade:** [`docs/traceability-matrix.md`](docs/traceability-matrix.md) ·
 **Model card:** [`docs/model_card.md`](docs/model_card.md)
