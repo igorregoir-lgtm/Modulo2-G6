@@ -176,7 +176,9 @@ export function AppShell({
                   <span className="hidden sm:inline">Sair</span>
                 </Button>
               </>
-            ) : null}
+            ) : (
+              <span aria-hidden className="w-9 shrink-0 lg:hidden" />
+            )}
           </div>
         </div>
       </header>
