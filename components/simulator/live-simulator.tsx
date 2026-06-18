@@ -29,6 +29,7 @@ import { TierBadge } from "@/components/tier-badge";
 import { useSpeak } from "@/components/tutor/use-speak";
 import { LEVERS } from "@/lib/simulator/levers";
 import { projectAnchored, type Projection } from "@/lib/simulator/engine";
+import { tierFromProb } from "@/lib/heuristic";
 import { buildNarration } from "@/lib/simulator/narrate";
 import { ARCHETYPE_DESC, ARCHETYPE_LABELS, featureLabel } from "@/lib/labels";
 import type { CustomerFeatures } from "@/lib/types";
@@ -111,6 +112,9 @@ export function LiveSimulator({
   );
 
   const { predNew, projected, deltaPP } = projection;
+  // O tier da "versão simulada" segue a PROJEÇÃO ancorada (não a prob. crua da
+  // heurística), para não contradizer o readout e o otimizador.
+  const projectedTier = tierFromProb(projected);
 
   const changedLevers = React.useMemo(
     () =>
@@ -244,11 +248,11 @@ export function LiveSimulator({
             <div className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--rule)] bg-[var(--paper-soft)] p-4">
               <RiskGauge
                 probability={projected}
-                tier={predNew.risk_tier}
+                tier={projectedTier}
                 threshold={predNew.threshold}
               />
               <div className="flex flex-wrap items-center justify-center gap-2">
-                <TierBadge tier={predNew.risk_tier} />
+                <TierBadge tier={projectedTier} />
                 <Badge variant="outline">{ARCHETYPE_LABELS[predNew.archetype]}</Badge>
               </div>
               <p className="text-center text-xs text-[var(--steel)]">
