@@ -1,37 +1,35 @@
 "use client";
 
 import * as React from "react";
-import { GraduationCap, ChevronDown } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TutorIcon } from "@/components/icons/tutor-icon";
 import { TutorInline } from "@/components/tutor/tutor-inline";
 
 interface AprenderCardProps {
-  /** Short concept id / screen name (mantido para contexto/compatibilidade). */
+  /** Mantidos para compatibilidade com as chamadas existentes. */
   screen: string;
   title: string;
-  /** Static "what & why" content (always available, no LLM needed). */
-  what: string;
-  why: string;
-  /** Optional extra bullets (e.g. theory references). */
+  what?: string;
+  why?: string;
   bullets?: string[];
   defaultOpen?: boolean;
 }
 
-export function AprenderCard({ title, what, why, bullets, defaultOpen = false }: AprenderCardProps) {
-  const [open, setOpen] = React.useState(defaultOpen);
+/** Card "Aprender · PBL": ao clicar, abre SOMENTE o chat inline do tutor
+ *  (no fluxo da página) — sem painel estático separado. */
+export function AprenderCard({ title }: AprenderCardProps) {
   const [showInline, setShowInline] = React.useState(false);
-
-  const seedQuestion = `Sobre a tela "${title}": o que ela faz e por que ela importa para reduzir cancelamentos? Explique de forma simples.`;
+  const seedQuestion = `Explique de forma simples a tela "${title}": o que ela faz e por que ela importa para reduzir cancelamentos.`;
 
   return (
     <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--rule)] bg-[var(--paper-soft)]">
       <div className="flex w-full items-center gap-3 px-4 py-3">
-        {/* Toggle area */}
+        {/* Área clicável (abre o inline) */}
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
+          onClick={() => setShowInline((v) => !v)}
+          aria-expanded={showInline}
           className="flex min-w-0 flex-1 items-center gap-3 text-left"
         >
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent-light)] text-[var(--accent-deep)]">
@@ -43,7 +41,7 @@ export function AprenderCard({ title, what, why, bullets, defaultOpen = false }:
           </span>
         </button>
 
-        {/* CTA do tutor — abre o chat INLINE (no próprio card) */}
+        {/* CTA — abre/fecha o chat INLINE */}
         <button
           type="button"
           onClick={() => setShowInline((v) => !v)}
@@ -68,49 +66,9 @@ export function AprenderCard({ title, what, why, bullets, defaultOpen = false }:
             </span>
           )}
         </button>
-
-        {/* Expand chevron (conteúdo "o que/por quê") */}
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-label={open ? "Recolher" : "Expandir"}
-          className="shrink-0 rounded-full p-1 text-[var(--steel)] transition-colors hover:bg-[var(--cloud)] hover:text-[var(--ink)]"
-        >
-          <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
-        </button>
       </div>
 
-      {open && (
-        <div className="border-t border-[var(--rule)] px-4 py-4 text-sm leading-relaxed text-[var(--ink-soft)]">
-          <p className="mb-2">
-            <span className="font-semibold text-[var(--ink)]">O que faz: </span>
-            {what}
-          </p>
-          <p className="mb-2">
-            <span className="font-semibold text-[var(--ink)]">Por que existe: </span>
-            {why}
-          </p>
-          {bullets && bullets.length > 0 && (
-            <ul className="mb-1 ml-4 list-disc space-y-1 text-[var(--steel)]">
-              {bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-          )}
-          {!showInline && (
-            <button
-              type="button"
-              onClick={() => setShowInline(true)}
-              className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-[var(--accent-deep)] hover:underline"
-            >
-              <TutorIcon className="h-3.5 w-3.5" /> Conversar com o tutor sobre isto
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Chat INLINE do tutor (no fluxo do card, não flutuante) */}
+      {/* Chat INLINE do tutor (no fluxo do card) */}
       {showInline && (
         <div className="border-t border-[var(--rule)] px-4 pb-4 pt-1">
           <TutorInline seedQuestion={seedQuestion} onClose={() => setShowInline(false)} />
