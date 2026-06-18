@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Ban, Send, Loader2, ExternalLink } from "lucide-react";
+import { Ban, Send, Loader2, ExternalLink, ShieldCheck, SearchX } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -109,11 +109,11 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
   return (
     <div className="flex flex-col gap-4">
       <Card>
-        <CardContent className="flex flex-wrap items-end gap-4 pt-5">
+        <CardContent className="flex flex-col gap-4 pt-5 sm:flex-row sm:flex-wrap sm:items-end">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="t">Tier de risco</Label>
             <Select value={tier} onValueChange={setTier}>
-              <SelectTrigger id="t" className="w-44">
+              <SelectTrigger id="t" className="w-full sm:w-44">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -129,7 +129,7 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="a">Arquétipo</Label>
             <Select value={arch} onValueChange={setArch}>
-              <SelectTrigger id="a" className="w-56">
+              <SelectTrigger id="a" className="w-full sm:w-56">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -143,9 +143,9 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
             </Select>
           </div>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:ml-auto">
             {blockedCount > 0 && (
-              <Badge variant="medio" className="gap-1">
+              <Badge variant="muted" className="gap-1">
                 <Ban className="h-3 w-3" />
                 {blockedCount} excluído(s)
               </Badge>
@@ -206,12 +206,12 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
                     <TierBadge tier={r.risk_tier} />
                   </TableCell>
                   <TableCell className="mono">{pct(r.churn_probability)}</TableCell>
-                  <TableCell className="text-sm text-[var(--ink-soft)]">
+                  <TableCell className="text-sm text-[var(--ink)]">
                     {ARCHETYPE_LABELS[r.archetype]}
                   </TableCell>
                   <TableCell>
                     {blocked ? (
-                      <Badge variant="medio" className="gap-1">
+                      <Badge variant="muted" className="gap-1">
                         <Ban className="h-3 w-3" />
                         Excluído — não-intrusão
                       </Badge>
@@ -223,14 +223,14 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
                     {blocked ? (
                       <Link
                         href="/principios-de-personalizacao"
-                        className="inline-flex items-center gap-1 text-xs text-[var(--accent-deep)] hover:underline"
+                        className="inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1.5 text-xs font-medium text-[var(--accent-deep)] hover:bg-[var(--paper-soft)]"
                       >
                         Política <ExternalLink className="h-3 w-3" />
                       </Link>
                     ) : (
                       <Link
                         href="/individual"
-                        className="inline-flex items-center gap-1 text-xs text-[var(--accent-deep)] hover:underline"
+                        className="inline-flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1.5 text-xs font-medium text-[var(--accent-deep)] hover:bg-[var(--paper-soft)]"
                       >
                         Detalhar <ExternalLink className="h-3 w-3" />
                       </Link>
@@ -241,8 +241,25 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
             })}
             {filtered.length === 0 && (
               <TableRow>
-                <TableCell colSpan={7} className="py-10 text-center text-sm text-[var(--steel)]">
-                  Nenhum membro para os filtros selecionados.
+                <TableCell colSpan={7} className="py-12">
+                  <div className="flex flex-col items-center gap-3 text-center">
+                    <SearchX className="h-8 w-8 text-[var(--steel-soft)]" />
+                    <p className="text-sm text-[var(--steel)]">
+                      Nenhum membro para os filtros selecionados.
+                    </p>
+                    {(tier !== "todos" || arch !== "todos") && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setTier("todos");
+                          setArch("todos");
+                        }}
+                      >
+                        Limpar filtros
+                      </Button>
+                    )}
+                  </div>
                 </TableCell>
               </TableRow>
             )}
@@ -250,10 +267,13 @@ export function CarteiraView({ rows }: { rows: PortfolioRow[] }) {
         </Table>
       </Card>
 
-      <p className="text-xs text-[var(--steel)]">
-        Membros do perfil &quot;cão que dorme&quot; aparecem em cinza e não podem ser selecionados
-        para ação — política de não-intrusão aplicada na interface e no servidor.
-      </p>
+      <div className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--accent-light)] bg-[var(--accent-light)]/30 p-4">
+        <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[var(--accent-deep)]" />
+        <p className="text-xs leading-relaxed text-[var(--ink-soft)]">
+          Membros do perfil &quot;cão que dorme&quot; aparecem em cinza e não podem ser
+          selecionados para ação — política de não-intrusão aplicada na interface e no servidor.
+        </p>
+      </div>
     </div>
   );
 }

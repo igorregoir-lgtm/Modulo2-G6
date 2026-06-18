@@ -4,6 +4,7 @@ import { AprenderCard } from "@/components/aprender-card";
 import { IndividualView } from "@/components/individual-view";
 import { getScoredCustomers } from "@/lib/scoring";
 import { ARCHETYPE_LABELS, TIER_LABELS } from "@/lib/labels";
+import { Users } from "lucide-react";
 
 export const metadata: Metadata = { title: "Consulta Individual" };
 
@@ -38,11 +39,19 @@ export default async function IndividualPage() {
       />
 
       {members.length === 0 ? (
-        <div className="rounded-[var(--radius-lg)] border border-dashed border-[var(--rule)] bg-[var(--paper)] p-10 text-center">
-          <p className="text-sm text-[var(--steel)]">
-            Nenhum membro disponível. Popule a tabela <span className="mono">customer</span> no
-            Supabase para começar.
-          </p>
+        <div className="flex flex-col items-center gap-3 rounded-[var(--radius-lg)] border border-dashed border-[var(--rule)] bg-[var(--paper-soft)] px-6 py-12 text-center">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--cloud)] text-[var(--steel)]">
+            <Users className="h-6 w-6" />
+          </span>
+          <div className="max-w-sm">
+            <p className="text-sm font-medium text-[var(--ink-soft)]">
+              Nenhum membro disponível
+            </p>
+            <p className="mt-1 text-xs text-[var(--steel)]">
+              Popule a tabela <span className="mono">customer</span> no Supabase para começar a
+              explorar os scores.
+            </p>
+          </div>
         </div>
       ) : (
         <IndividualView members={members} />
