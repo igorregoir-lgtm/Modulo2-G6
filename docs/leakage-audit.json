@@ -1,0 +1,114 @@
+{
+  "correlation_with_target": {
+    "delta_freq": -0.5955,
+    "flag_early_user": 0.558,
+    "Lifetime": -0.4382,
+    "ratio_freq_atual_vs_lifetime": -0.4339,
+    "Avg_class_frequency_current_month": -0.4123,
+    "Age": -0.4047,
+    "Contract_period": -0.39,
+    "Month_to_end_contract": -0.3814,
+    "contract_x_lifetime": -0.3356,
+    "Avg_class_frequency_total": -0.2497,
+    "Avg_additional_charges_total": -0.1987,
+    "Group_visits": -0.1753,
+    "Promo_friends": -0.1622,
+    "Partner": -0.158,
+    "Near_Location": -0.1281,
+    "flag_sleeping_dog": -0.0654,
+    "Phone": -0.0012,
+    "gender": 0.0007
+  },
+  "future_variable_check": {
+    "month_to_end_by_contract": {
+      "1": {
+        "mte_mean": 1.0,
+        "mte_max": 1.0,
+        "n": 2207,
+        "churn": 0.423
+      },
+      "6": {
+        "mte_mean": 5.616,
+        "mte_max": 6.0,
+        "n": 833,
+        "churn": 0.125
+      },
+      "12": {
+        "mte_mean": 10.84,
+        "mte_max": 12.0,
+        "n": 960,
+        "churn": 0.024
+      }
+    },
+    "corr_mte_contract": 0.9731,
+    "corr_mte_lifetime": 0.1611
+  },
+  "ab_test": {
+    "features_safe": [
+      "gender",
+      "Near_Location",
+      "Partner",
+      "Promo_friends",
+      "Phone",
+      "Contract_period",
+      "Group_visits",
+      "Age",
+      "Avg_additional_charges_total",
+      "Lifetime",
+      "Avg_class_frequency_total",
+      "Avg_class_frequency_current_month",
+      "ratio_freq_atual_vs_lifetime",
+      "delta_freq",
+      "contract_x_lifetime",
+      "flag_early_user",
+      "flag_sleeping_dog"
+    ],
+    "features_with_leaky": [
+      "gender",
+      "Near_Location",
+      "Partner",
+      "Promo_friends",
+      "Phone",
+      "Contract_period",
+      "Group_visits",
+      "Age",
+      "Avg_additional_charges_total",
+      "Lifetime",
+      "Avg_class_frequency_total",
+      "Avg_class_frequency_current_month",
+      "ratio_freq_atual_vs_lifetime",
+      "delta_freq",
+      "contract_x_lifetime",
+      "flag_early_user",
+      "flag_sleeping_dog",
+      "Month_to_end_contract"
+    ],
+    "auc_safe": 0.9739,
+    "auc_with_leaky": 0.9739,
+    "auc_delta_leaky_minus_safe": 0.0
+  },
+  "per_feature_conclusion": {
+    "Month_to_end_contract": "REMOVIDA. Correlação |0.381| com o alvo e altamente determinada por Contract_period (corr=0.973). Funciona como relógio do contrato — informação de futuro/quase-leakage. O ganho de AUC ao incluí-la (+0.0000) não compensa o risco de inflar a métrica artificialmente.",
+    "Lifetime": "MANTIDA. Tempo de casa observável no momento da predição (não é futuro), causal-plausível (early users churnam mais) e necessária para flag_early_user e flag_sleeping_dog. Não constitui leakage."
+  },
+  "final_feature_set": [
+    "gender",
+    "Near_Location",
+    "Partner",
+    "Promo_friends",
+    "Phone",
+    "Contract_period",
+    "Group_visits",
+    "Age",
+    "Avg_additional_charges_total",
+    "Lifetime",
+    "Avg_class_frequency_total",
+    "Avg_class_frequency_current_month",
+    "ratio_freq_atual_vs_lifetime",
+    "delta_freq",
+    "contract_x_lifetime",
+    "flag_early_user",
+    "flag_sleeping_dog"
+  ],
+  "decision": "Conjunto final = features originais SEM Month_to_end_contract + features derivadas. Defensavelmente leakage-safe: nenhuma variável de futuro, pré-processamento fit só no treino."
+}

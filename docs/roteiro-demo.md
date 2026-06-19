@@ -64,6 +64,7 @@ Página pública (LGPD / ANPD 07/2025): quais dados, com que finalidade, como co
 | Pergunta do avaliador | Onde conferir |
 |---|---|
 | Modelo validado, sem overfit/leakage, métricas? | [`docs/model_card.md`](model_card.md) (TEST ROC-AUC 0,988 · recall 0,95 · gap 0,010) |
+| O 0,988 é confiável (não é leakage)? | [`docs/model-honesty.md`](model-honesty.md) — A/B prova que remover a variável suspeita custa **AUC +0,0000** + evidência em `leakage-audit.json` |
 | SHAP (global + local)? | EDA + waterfall por cliente; `model_card.md` §7 |
 | Dois modelos (produção × simulação)? | `model_card.md` §11 + [ADR-0014](decisions/0014-ancoragem-simulador-real-mais-delta.md) |
 | LGPD / sleeping dogs? | `/principios-de-personalizacao` + [ADR-0008](decisions/0008-arquetipos-sleeping-dog.md) |

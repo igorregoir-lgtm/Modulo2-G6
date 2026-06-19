@@ -9,7 +9,8 @@ Artefato 2 — Trilha de Tecnologia (Inteli, Módulo 2).
 perfil (CS/Exec) existe no código (`lib/supabase/middleware.ts`, `lib/auth.ts`) e pode ser reativado.
 📄 **Especificação:** [`docs/SPEC.md`](docs/SPEC.md) · **Decisões:** [`docs/decisions/`](docs/decisions) ·
 **Rastreabilidade:** [`docs/traceability-matrix.md`](docs/traceability-matrix.md) ·
-**Model card:** [`docs/model_card.md`](docs/model_card.md)
+**Model card:** [`docs/model_card.md`](docs/model_card.md) ·
+**Honestidade do modelo:** [`docs/model-honesty.md`](docs/model-honesty.md)
 
 > Inspirado em [`allexfernand/Modulo2-G6`](https://github.com/allexfernand/Modulo2-G6) (fork), evoluído
 > com SHAP local/global, agente LLM, arquétipos, calibração, governança LGPD e auditoria.
