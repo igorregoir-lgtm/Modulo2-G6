@@ -42,6 +42,21 @@ Conclusão prática: **o caminho Python está fora** para este alvo. A rota viá
 pré-processamento em JS — score real leve; SHAP segue como item à parte (manter o waterfall do
 surrogate, rotulado). Produção permaneceu intacta durante todo o experimento.
 
+### Caminho ONNX — PROVADO (branch `feat/online-inference-onnx`)
+- `pipeline/export_onnx.py` converte o `calibrated_model` (XGBoost+sigmoid) para **ONNX de 653 KB**
+  e extrai os params do pré-processamento; a validação numérica bate com `predict()` de produção
+  (**max |Δ| = 5e-5**).
+- `app/api/infer-onnx/route.ts` serve o score real via **onnxruntime-node**; pré-processamento
+  replicado em JS (`lib/onnx/preprocess.ts`, espelha `features.py`+ColumnTransformer).
+- **Local:** early_dropper 0.9413, engajado 0.0117 (== produção).
+- **Vercel preview:** build **● Ready** (~40s) — onnxruntime-node + `model.onnx` empacotam e sobem
+  (o bloqueio de 868 MB do caminho Python sumiu; bundle na casa de MB).
+- **Pendente:** a invocação do preview retornou **401** (Vercel Deployment Protection nos previews);
+  validar o runtime abrindo o preview autenticado no navegador, ou via token de bypass, ou ao
+  promover para produção. Falta também: **wire da flag `NEXT_PUBLIC_ONLINE_INFERENCE` + fallback**
+  no simulador e a decisão sobre SHAP (manter surrogate rotulado). **Não mergeado em `main`** (muda o
+  bundle de produção e expõe rota nova) — aguarda revisão/decisão.
+
 ## Consequências
 - A honestidade fica **explícita e rastreável**: `docs/model-honesty.md` declara o limite; este ADR +
   o spec dão o caminho. Nada de promessa vaga.

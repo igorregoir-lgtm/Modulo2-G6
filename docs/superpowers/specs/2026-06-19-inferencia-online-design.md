@@ -55,6 +55,12 @@ design acima fica pronto para execução guiada por preview.
 ## 8. Achado do preview (2026-06-19)
 PoC do **Caminho A** (Python Function) testada num preview deployment (branch
 `feat/online-inference-preview`): **build falhou com `bundle size 868.68 MB > 500 MB`** (limite de
-ephemeral storage da Lambda), mesmo score-only/sem SHAP. ⇒ **Caminho A descartado**; seguir pelo
-**Caminho B (ONNX)** — `onnxruntime-node` numa API route do Next (~dezenas de MB) + pré-processamento
-replicado em JS. SHAP fica no híbrido (waterfall do surrogate, rotulado). `main` ficou intacta.
+ephemeral storage da Lambda), mesmo score-only/sem SHAP. ⇒ **Caminho A descartado**.
+
+**Caminho B (ONNX) — PROVADO** (branch `feat/online-inference-onnx`): `export_onnx.py` →
+`model.onnx` (653 KB), validado vs `predict()` (max |Δ| = 5e-5); `api/infer-onnx` via
+`onnxruntime-node` + pré-proc em JS. Local: 0.9413/0.0117 (== produção). Preview Vercel: build
+**Ready** (onnxruntime-node + .onnx empacotam). Invocação do preview gated por auth (401 — proteção
+de preview). Falta: wire da flag+fallback no simulador, decisão de SHAP (surrogate rotulado), e
+validar runtime (preview autenticado/bypass ou promover). Não mergeado em `main`. SHAP fica no
+híbrido (waterfall do surrogate, rotulado).
