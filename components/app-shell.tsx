@@ -8,11 +8,11 @@ import {
   BarChart3,
   UserSearch,
   Users,
-  ShieldCheck,
   Menu,
   LogOut,
   Activity,
   Map,
+  BookText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -38,8 +38,8 @@ const NAV: NavItem[] = [
   { href: "/carteira", label: "Visão de Carteira", icon: Users, roles: ["cs", "admin", "exec"] },
   {
     href: "/principios-de-personalizacao",
-    label: "Princípios (LGPD)",
-    icon: ShieldCheck,
+    label: "O Artefato",
+    icon: BookText,
     roles: ["cs", "admin", "exec"],
   },
 ];
