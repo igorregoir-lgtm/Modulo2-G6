@@ -1,4 +1,4 @@
-// Bloco de destaque accent — usado nos beats "what the hell" do dossiê.
+// Bloco de destaque accent — usado nos momentos de destaque do dossiê.
 
 import { Zap, TriangleAlert } from "lucide-react";
 
