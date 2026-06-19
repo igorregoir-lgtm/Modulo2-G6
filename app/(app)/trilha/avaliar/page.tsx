@@ -5,7 +5,10 @@ import { AprenderCard } from "@/components/aprender-card";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ThresholdExplorer } from "@/components/trilha/threshold-explorer";
 import { CalibrationCurve } from "@/components/trilha/calibration-curve";
+import { UpliftPanel, type UpliftRow } from "@/components/trilha/uplift-panel";
 import { getScoredCustomers } from "@/lib/scoring";
+import { upliftProxy } from "@/lib/trilha/uplift";
+import { ARCHETYPE_LABELS } from "@/lib/labels";
 
 export const metadata: Metadata = { title: "Avaliar o sistema" };
 
@@ -15,6 +18,37 @@ export default async function AvaliarPage() {
     .filter((s) => s.customer.true_churn === 0 || s.customer.true_churn === 1)
     .map((s) => ({ p: Number(s.prediction.churn_probability), y: s.customer.true_churn as 0 | 1 }));
   const threshold = scored[0]?.prediction.threshold ?? 0.5;
+
+  // Seleção representativa p/ ilustrar "risco ≠ uplift": maior risco, um "cão que
+  // dorme" (se houver) e um de baixo risco. Uplift calculado no servidor (puro).
+  const byRisk = [...scored].sort(
+    (a, b) => b.prediction.churn_probability - a.prediction.churn_probability,
+  );
+  const dog = scored.find((s) => s.prediction.archetype === "sleeping_dog");
+  const low = [...byRisk].reverse().find((s) => s.prediction.risk_tier === "baixo");
+  const picks = [byRisk[0], byRisk[1], dog, low].filter(
+    (s): s is NonNullable<typeof s> => Boolean(s),
+  );
+  const seen = new Set<string>();
+  const upliftRows: UpliftRow[] = picks
+    .filter((s) => {
+      const ref = s.customer.external_ref;
+      if (seen.has(ref)) return false;
+      seen.add(ref);
+      return true;
+    })
+    .map((s) => {
+      const u = upliftProxy(s.customer.features, s.prediction.churn_probability);
+      return {
+        ref: s.customer.external_ref,
+        realProb: s.prediction.churn_probability,
+        tier: s.prediction.risk_tier,
+        archetype: ARCHETYPE_LABELS[s.prediction.archetype],
+        upliftPP: Math.round(u.uplift * 100),
+        action: u.recommendedAction,
+        reason: u.reason,
+      };
+    });
 
   return (
     <div className="flex flex-col gap-6">
@@ -41,6 +75,19 @@ export default async function AvaliarPage() {
         </CardHeader>
         <CardContent>
           <ThresholdExplorer points={points} defaultCutoff={threshold} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Risco ≠ quem abordar (uplift)</CardTitle>
+          <CardDescription>
+            O passo seguinte ao corte: do risco para o efeito incremental. Quem realmente vale uma
+            intervenção proativa — e quem deixar em paz.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <UpliftPanel rows={upliftRows} />
         </CardContent>
       </Card>
 
