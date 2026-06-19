@@ -51,3 +51,10 @@ cai na **heurística ancorada** (hoje). Atrás de uma flag (`NEXT_PUBLIC_ONLINE_
 **Adiar a implementação** e manter o surrogate (ADR-0017): os ganhos não justificam o risco de
 derromper a produção do artefato perto da avaliação, e o SHAP on-the-fly é um projeto à parte. O
 design acima fica pronto para execução guiada por preview.
+
+## 8. Achado do preview (2026-06-19)
+PoC do **Caminho A** (Python Function) testada num preview deployment (branch
+`feat/online-inference-preview`): **build falhou com `bundle size 868.68 MB > 500 MB`** (limite de
+ephemeral storage da Lambda), mesmo score-only/sem SHAP. ⇒ **Caminho A descartado**; seguir pelo
+**Caminho B (ONNX)** — `onnxruntime-node` numa API route do Next (~dezenas de MB) + pré-processamento
+replicado em JS. SHAP fica no híbrido (waterfall do surrogate, rotulado). `main` ficou intacta.

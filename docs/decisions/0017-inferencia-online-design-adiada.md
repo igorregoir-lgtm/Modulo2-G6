@@ -28,6 +28,20 @@ aproximação.
 3. **Design + adiar, execução guiada por preview (escolhido):** entrega a rota técnica completa e a
    decisão auditável, sem arriscar o sistema no ar.
 
+## Resultado empírico (preview, 2026-06-19)
+PoC executada num **preview deployment** (branch `feat/online-inference-preview`, sem tocar `main`):
+uma Vercel Python Function (`api/predict-real.py`) servindo o XGBoost real (score-only, SHAP fora),
+com `requirements.txt` slim (joblib, numpy, pandas, scikit-learn, scipy, xgboost).
+
+> **Build falhou (esperado):** `Total bundle size (868.68 MB) exceeds Lambda ephemeral storage limit
+> (500 MB)`. Mesmo sem SHAP, a stack de ML pesa ~**868 MB** — inviável como função serverless Python
+> na Vercel.
+
+Conclusão prática: **o caminho Python está fora** para este alvo. A rota viável é **ONNX**
+(exportar XGBoost→ONNX + `onnxruntime-node` numa API route do Next, ~dezenas de MB), replicando o
+pré-processamento em JS — score real leve; SHAP segue como item à parte (manter o waterfall do
+surrogate, rotulado). Produção permaneceu intacta durante todo o experimento.
+
 ## Consequências
 - A honestidade fica **explícita e rastreável**: `docs/model-honesty.md` declara o limite; este ADR +
   o spec dão o caminho. Nada de promessa vaga.
