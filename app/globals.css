@@ -155,4 +155,10 @@ h1, h2, h3, h4 {
 
 @media print {
   .no-print { display: none !important; }
+  @page { margin: 1.8cm; }
+  html, body { background: #fff !important; }
+  body { color: #000; }
+  /* tira o fundo/padding do shell e limpa sombras p/ um PDF de relatório limpo */
+  main { background: #fff !important; padding: 0 !important; }
+  * { box-shadow: none !important; }
 }

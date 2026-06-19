@@ -55,7 +55,7 @@ export function GuideRail() {
   }
 
   return (
-    <div className="no-print fixed inset-x-0 bottom-0 z-30 px-3 pb-3 pointer-events-none">
+    <div className="no-print fixed inset-x-0 bottom-0 z-30 px-3 pb-20 sm:pb-3 pointer-events-none">
       <div
         className={cn(
           "pointer-events-auto mx-auto max-w-4xl overflow-hidden rounded-[var(--radius-lg)] border border-[var(--accent)]/40 bg-[var(--paper)] shadow-[0_-6px_28px_-12px_rgba(14,31,48,0.35)]",

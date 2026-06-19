@@ -54,7 +54,11 @@ export function TrilhaMap() {
               {hydrated ? completed.length : 0} de {TRILHA_TOTAL} missões
             </p>
           </div>
-          <Progress value={hydrated ? pct : 0} className="mt-2" />
+          <Progress
+            value={hydrated ? pct : 0}
+            aria-label={`Progresso da trilha: ${hydrated ? completed.length : 0} de ${TRILHA_TOTAL} missões`}
+            className="mt-2"
+          />
         </div>
         <Button variant="accent" asChild className="shrink-0">
           <Link href={allDone ? MISSIONS[0].href : firstIncomplete.href}>

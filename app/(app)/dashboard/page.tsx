@@ -7,7 +7,8 @@ import { ScoreTrend, TierSplit } from "@/components/charts/dashboard-charts";
 import { Badge } from "@/components/ui/badge";
 import { computeCohortStats } from "@/lib/analytics";
 import { pct } from "@/lib/utils";
-import { BarChart3 } from "lucide-react";
+import { BarChart3, Map, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = { title: "Dashboard Executivo" };
 
@@ -32,6 +33,25 @@ export default async function DashboardPage() {
       >
         <Badge variant="muted">Base analisada: {stats.n} membros</Badge>
       </PageHeader>
+
+      {/* Porta de entrada pedagógica — tour guiado da Trilha */}
+      <Link
+        href="/trilha"
+        className="group flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--accent)]/40 bg-[var(--accent-light)]/40 px-4 py-3 transition-colors hover:bg-[var(--accent-light)]/70 focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+      >
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-white">
+          <Map className="h-5 w-5" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold text-[var(--ink)]">
+            Comece pela Trilha de Aprendizado
+          </span>
+          <span className="block text-xs text-[var(--steel)]">
+            Tour guiado (~13 min) pela jornada de retenção — do problema do churn à estratégia.
+          </span>
+        </span>
+        <ArrowRight className="h-4 w-4 shrink-0 text-[var(--accent-deep)] transition-transform group-hover:translate-x-0.5" />
+      </Link>
 
       <AprenderCard
         screen="Dashboard Executivo"

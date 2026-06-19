@@ -85,6 +85,13 @@ export function StationCheck({
         })}
       </ul>
 
+      {revealed && chosen !== null && (
+        <p className="sr-only" role="status" aria-live="polite">
+          {check.options[chosen].correct ? "Resposta correta. " : "Não foi dessa vez. "}
+          {check.options[chosen].feedback}
+        </p>
+      )}
+
       <div className="flex flex-wrap items-center gap-2 pt-1">
         {revealed ? (
           <Button variant="accent" size="sm" onClick={onComplete}>
