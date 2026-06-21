@@ -130,7 +130,9 @@ export default function LoginPage() {
           <p className="mt-4 text-sm leading-relaxed text-[var(--cloud)]">
             Prevê o risco de churn (cancelamento da assinatura) de cada cliente, explica o porquê
             caso a caso com SHAP (quanto cada variável pesou na previsão) e recomenda a ação de
-            retenção individual — tudo auditável de ponta a ponta.
+            retenção individualmente para cada cliente — ex.: convite a desafios em grupo, upgrade de
+            plano com até 20% de desconto, onboarding guiado ou benefício de fidelidade — tudo
+            auditável de ponta a ponta.
           </p>
         </div>
         <p className="flex items-center gap-2 text-xs text-[var(--steel-soft)]">

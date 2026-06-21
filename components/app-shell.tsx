@@ -13,6 +13,7 @@ import {
   Activity,
   Map,
   BookText,
+  Target,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -188,13 +189,19 @@ export function AppShell({
         </div>
       </header>
 
-      {/* Faixa de proposta de valor (todas as páginas) */}
-      <div className="no-print border-b border-[var(--rule)] bg-[var(--paper)]">
-        <div className="mx-auto max-w-3xl px-4 py-2.5 text-center">
-          <p className="text-xs leading-relaxed text-[var(--steel)] sm:text-sm">
-            Prevê o risco de churn (cancelamento da assinatura) de cada cliente, explica o porquê
-            caso a caso com SHAP (quanto cada variável pesou na previsão) e recomenda a ação de
-            retenção individual — tudo auditável de ponta a ponta.
+      {/* Faixa de proposta de valor (todas as páginas) — destaque */}
+      <div className="no-print border-b border-[var(--accent)]/30 bg-[var(--accent-light)]/50">
+        <div className="mx-auto flex max-w-4xl items-start justify-center gap-2.5 px-4 py-3 sm:items-center">
+          <Target className="mt-0.5 hidden h-4 w-4 shrink-0 text-[var(--accent-deep)] sm:mt-0 sm:block" aria-hidden />
+          <p className="text-center text-[13px] leading-relaxed text-[var(--ink-soft)] sm:text-sm">
+            Prevê o risco de <span className="font-semibold text-[var(--ink)]">churn</span> (cancelamento
+            da assinatura) de cada cliente, explica o porquê caso a caso com{" "}
+            <span className="font-semibold text-[var(--ink)]">SHAP</span> (quanto cada variável pesou na
+            previsão) e recomenda a{" "}
+            <span className="font-semibold text-[var(--accent-deep)]">ação de retenção individualmente
+            para cada cliente</span> — ex.: convite a desafios em grupo, upgrade de plano com até 20% de
+            desconto, onboarding guiado ou benefício de fidelidade — tudo{" "}
+            <span className="font-semibold text-[var(--ink)]">auditável de ponta a ponta</span>.
           </p>
         </div>
       </div>
