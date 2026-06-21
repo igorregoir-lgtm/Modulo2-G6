@@ -123,13 +123,14 @@ export default function LoginPage() {
           <span className="font-display text-lg font-semibold">Vitaliza</span>
         </div>
         <div className="max-w-md">
-          <p className="eyebrow mb-3 text-[var(--steel-soft)]">Sistema de Inteligência de Retenção</p>
+          <p className="eyebrow mb-3 text-[var(--steel-soft)]">Sistema de Inteligência de Retenção de Clientes</p>
           <h1 className="font-display text-3xl font-semibold leading-tight">
             Prever, explicar e agir — sem acordar o cão que dorme.
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-[var(--cloud)]">
-            Risco de churn por usuário, explicação individual com SHAP e recomendação prescritiva,
-            tudo auditável de ponta a ponta.
+            Prevê o risco de churn (cancelamento da assinatura) de cada cliente, explica o porquê
+            caso a caso com SHAP (quanto cada variável pesou na previsão) e recomenda a ação de
+            retenção individual — tudo auditável de ponta a ponta.
           </p>
         </div>
         <p className="flex items-center gap-2 text-xs text-[var(--steel-soft)]">

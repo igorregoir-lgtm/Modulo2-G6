@@ -116,7 +116,7 @@ export default async function ArtefatoPage() {
             <BookText className="h-4 w-4" />O Artefato · dossiê de explicabilidade
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-[var(--ink)] sm:text-4xl">
-            Vitaliza — Sistema de Inteligência de Retenção
+            Vitaliza — Sistema de Inteligência de Retenção de Clientes
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--ink-soft)]">
             Explicação completa do artefato para avaliação: o que é, as dores que ataca, a arquitetura

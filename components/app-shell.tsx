@@ -156,7 +156,7 @@ export function AppShell({
           </div>
 
           <p className="min-w-0 flex-1 truncate px-1 text-center font-display text-[13px] font-semibold tracking-tight text-[var(--paper)] sm:text-base lg:text-lg">
-            Sistema de Inteligência de Retenção
+            Sistema de Inteligência de Retenção de Clientes
           </p>
 
           <div className="flex shrink-0 items-center gap-3">
@@ -192,8 +192,9 @@ export function AppShell({
       <div className="no-print border-b border-[var(--rule)] bg-[var(--paper)]">
         <div className="mx-auto max-w-3xl px-4 py-2.5 text-center">
           <p className="text-xs leading-relaxed text-[var(--steel)] sm:text-sm">
-            Risco de churn por usuário, explicação individual com SHAP e recomendação prescritiva,
-            tudo auditável de ponta a ponta.
+            Prevê o risco de churn (cancelamento da assinatura) de cada cliente, explica o porquê
+            caso a caso com SHAP (quanto cada variável pesou na previsão) e recomenda a ação de
+            retenção individual — tudo auditável de ponta a ponta.
           </p>
         </div>
       </div>
