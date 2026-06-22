@@ -4,39 +4,38 @@
 // client-infer.ts — inferência REAL do XGBoost (ONNX) NO NAVEGADOR via WASM
 // (onnxruntime-web). Sem função serverless → sem o muro de 250 MB da Vercel;
 // roda no cliente: instantâneo (sem ida-e-volta ao servidor) e custo zero.
-// Reaproveita o pré-processamento em JS (preprocess.ts, espelha features.py) e o
-// model.onnx (653 KB, servido de /public/onnx). Ver ADR-0017.
+// Reaproveita o pré-processamento em JS (preprocess.ts) e o model.onnx (653 KB,
+// servido de /public/onnx). Ver ADR-0017.
 //
-// O motor WASM é carregado sob demanda (dynamic import → code-split) e seus
-// binários .wasm vêm do CDN jsDelivr na MESMA versão do onnxruntime-web instalado
-// (evita o atrito de empacotar .wasm no Turbopack). Single-thread (numThreads=1)
-// para não exigir cross-origin isolation (SharedArrayBuffer/COOP-COEP).
+// SELF-CONTAINED (sem CDN externo): usa o build WASM-only (`onnxruntime-web/wasm`)
+// e serve o binário .wasm do PRÓPRIO app (/public/ort) via `wasmPaths`. Carregado
+// sob demanda (dynamic import → code-split). Single-thread (numThreads=1) para não
+// exigir cross-origin isolation (SharedArrayBuffer/COOP-COEP).
 // ============================================================================
 
 import { buildInputVector } from "./preprocess";
 import type { CustomerFeatures } from "@/lib/types";
 
-// Manter em sincronia com a versão de "onnxruntime-web" no package.json.
-const ORT_WEB_VERSION = "1.27.0";
 const MODEL_URL = "/onnx/model.onnx";
+const WASM_PATH = "/ort/"; // binários .wasm servidos de public/ort (self-hosted)
 
-type Ort = typeof import("onnxruntime-web");
+type Ort = typeof import("onnxruntime-web/wasm");
 
 let ortPromise: Promise<Ort> | null = null;
-let sessionPromise: Promise<import("onnxruntime-web").InferenceSession> | null = null;
+let sessionPromise: Promise<import("onnxruntime-web/wasm").InferenceSession> | null = null;
 
 function loadOrt(): Promise<Ort> {
   if (!ortPromise) {
-    ortPromise = import("onnxruntime-web").then((ort) => {
+    ortPromise = import("onnxruntime-web/wasm").then((ort) => {
       ort.env.wasm.numThreads = 1; // sem SharedArrayBuffer/COOP-COEP
-      ort.env.wasm.wasmPaths = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_WEB_VERSION}/dist/`;
+      ort.env.wasm.wasmPaths = WASM_PATH;
       return ort;
     });
   }
   return ortPromise;
 }
 
-function getSession(): Promise<import("onnxruntime-web").InferenceSession> {
+function getSession(): Promise<import("onnxruntime-web/wasm").InferenceSession> {
   if (!sessionPromise) {
     sessionPromise = loadOrt().then((ort) => ort.InferenceSession.create(MODEL_URL));
   }

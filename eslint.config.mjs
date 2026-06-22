@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Assets estáticos (inclui o glue .mjs vendorado do onnxruntime-web em public/ort).
+    "public/**",
     // Protected non-Next dirs owned by other processes (Python / data / docs).
     ".venv/**",
     "pipeline/**",
